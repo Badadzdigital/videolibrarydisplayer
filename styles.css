@@ -1,0 +1,146 @@
+#vldp-container {
+    z-index: 9999999999;
+    position: absolute;
+    width: 100%;
+}
+    
+#library-container {
+    position: absolute;
+    width: 90%;
+    left: 5%;
+    padding-top: 5%;
+    margin-top: 5%;
+    padding-bottom: 5%;
+    margin-bottom: 5%;
+}
+    
+.video-card {
+    display: inline-block;
+    position: relative;
+    margin-top: 2%;
+    margin-left: 2%;
+    /*width: 30%;*/
+    width: calc(16vmin * 2);
+    height: calc(9vmin * 2);
+}
+    
+#aspect-ratio {
+    display:none;
+    position: absolute;
+    width: calc(16vmin * 5);
+    height: calc(9vmin * 5);
+    top: 25%;
+    left: 50%;
+    pointer-events: none;
+}
+
+#iframePlayer {
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    top: 0;
+    left: -50%;
+}
+  
+#modal {
+    display: block;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    background-color: Black;
+    opacity: 0;
+    pointer-events: none;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+    
+#page-controls {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+    
+#next-page {
+    position: absolute;
+    width: 15%;
+    height: 70%;
+    top: 0;
+    right: 20%;
+    background-color: #666666;
+    outline: none;
+    border: none;
+    outline: 1px dotted #BBBBBB;
+    outline-offset: -5px;
+    cursor: pointer;
+    -webkit-transition: all 0.1s ease-in-out;
+    -moz-transition: all 0.1s ease-in-out;
+    -ms-transition: all 0.1s ease-in-out;
+    -o-transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;
+}
+    
+#next-page:hover {
+    background-color: #888888;
+}
+    
+#prev-page {
+    position: absolute;
+    width: 15%;
+    height: 70%;
+    top: 0;
+    left: 20%;
+    background-color: #666666;
+    outline: none;
+    border: none;
+    outline: 1px dotted #BBBBBB;
+    outline-offset: -5px;
+    cursor: pointer;
+    -webkit-transition: all 0.1s ease-in-out;
+    -moz-transition: all 0.1s ease-in-out;
+    -ms-transition: all 0.1s ease-in-out;
+    -o-transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;
+}
+    
+#prev-page:hover {
+    background-color: #888888;
+}
+  
+.text {
+    font-family: 'Heebo', sans-serif;
+    pointer-events: none;
+    color: white;
+    font-size: 2.5vmin;
+    text-align: center;
+    top: 50%;
+    -webkit-transition: all 0.1s ease-in-out;
+    -moz-transition: all 0.1s ease-in-out;
+    -ms-transition: all 0.1s ease-in-out;
+    -o-transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;
+}
+    
+.video-card .text {
+    text-align: center;
+    font-size: 2.5vmin;
+    text-shadow: 0.15vmin 0.15vmin 0.2vmin rgba(0,0,0,0.5);
+}
+    
+#page-text .text {
+    margin-top: 0.75%;
+    color: #666666;
+}
+    
+#next-page .text {
+    margin-top: 4%;
+}
+    
+#prev-page .text {
+    margin-top: 4%;
+}
