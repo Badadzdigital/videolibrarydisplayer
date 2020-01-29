@@ -19,9 +19,13 @@
     position: relative;
     margin-top: 2%;
     margin-left: 2%;
-    /*width: 30%;*/
     width: calc(16vmin * 2);
     height: calc(9vmin * 2);
+    -webkit-transition: all 2s ease-in-out;
+    -moz-transition: all 2s ease-in-out;
+    -ms-transition: all 2s ease-in-out;
+    -o-transition: all 2s ease-in-out;
+    transition: all 2s ease-in-out;
 }
     
 #aspect-ratio {
