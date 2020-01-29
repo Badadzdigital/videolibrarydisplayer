@@ -16,6 +16,7 @@
     var lastIndex;
     var modalOpen = 0;
     var playing = 0;
+    var i = 0;
     var videoPlayer;
     var iframePlayer;
     
@@ -167,7 +168,10 @@
         for(i=x;i<=y;i++) {
             videoName = nameList[i-1];
             videoImg = imgList[i-1];
-            library.innerHTML += "<div style='background-image: url(&quot;"+videoImg+"&quot;); background-size: contain; background-repeat: no-repeat;' class='video-card' id='vid"+i+"' onclick='openVideo(&quot;"+i+"&quot;);' onmouseenter='startPreview(&quot;"+i+"&quot;);' onmouseout='endPreview(&quot;"+i+"&quot;);' draggable='false'><p class='text'>"+videoName+"</p>";
+            library.innerHTML += "<div style='background-image: url(&quot;"+videoImg+"&quot;); background-size: contain; background-repeat: no-repeat;' class='video-card' id='vid"+i+"' draggable='false'><p class='text'>"+videoName+"</p>";
+            document.getElementById("vid"+i).addEventListener("click", openVideo(i));
+            document.getElementById("vid"+i).addEventListener("mouseenter", startPreview(i));
+            document.getElementById("vid"+i).addEventListener("mouseleave", endPreview(i));
             if(i==y) {
                 document.getElementById("page-text").innerHTML = "<p class='text'>Page "+currentPage+"/"+pageCount+"</p>";
                 var xhash = window.location.hash;
