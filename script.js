@@ -182,7 +182,7 @@
                 var xhash = window.location.hash;
                 if(xhash!="") {
                     xhash = xhash.replace("#vid", "");
-                    openVideo(xhash);
+                    setTimeout(openVideo.bind(null, xhash), 700);
                 }
             }
         }
