@@ -255,4 +255,6 @@
             callback: authorizationCB
         });
     }
+    
+    setTimeout(initialize(), 2000);
 })();
