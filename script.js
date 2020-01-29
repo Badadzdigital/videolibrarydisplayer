@@ -158,6 +158,13 @@
         buildLibrary();
     }
     
+    function addCardEventListeners(i) {
+        var cardDiv = document.getElementById("vid"+i);
+        cardDiv.addEventListener("click", openVideo.bind(null, i));
+        cardDiv.addEventListener("mouseenter", startPreview.bind(null, i));
+        cardDiv.addEventListener("mouseleave", endPreview.bind(null, i));
+    }
+    
     function buildLibrary() {
         var library = document.getElementById("library-container");
         library.innerHTML="<div id='page-controls'><div id='page-text'></div><button id='prev-page' onclick='previousPage()'><p class='text'>Previous</p></button><button id='next-page' onclick='nextPage()'><p class='text'>Next</p></button></div>";
@@ -169,12 +176,7 @@
             videoName = nameList[i-1];
             videoImg = imgList[i-1];
             library.innerHTML += "<div id='vid"+i+"' class='video-card' style='background-image: url(&quot;"+videoImg+"&quot;); background-size: contain; background-repeat: no-repeat;' draggable='false'><p class='text'>"+videoName+"</p>";
-            var cardDiv = document.getElementById("vid"+i);
-            setTimeout(function(){
-                cardDiv.addEventListener("click", openVideo(i));
-                cardDiv.addEventListener("mouseenter", startPreview(i));
-                cardDiv.addEventListener("mouseleave", endPreview(i));
-            }, 500);
+            setTimeout(addCardEventListeners.bind(null, i), 500);
             if(i==y) {
                 document.getElementById("page-text").innerHTML = "<p class='text'>Page "+currentPage+"/"+pageCount+"</p>";
                 var xhash = window.location.hash;
