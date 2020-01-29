@@ -12,7 +12,7 @@
     var idList = [];
     var nameList = [];
     var imgList = [];
-    var videoIndex = 1;
+    var firstVideoIndex = 1;
     var lastIndex;
     var modalOpen = 0;
     var playing = 0;
@@ -166,10 +166,18 @@
     }
     
     function buildLibrary() {
+        var xhash = window.location.hash;
+        if(xhash!="") {
+            xhash = xhash.replace("#vid", "");
+            while(xhash>videoCountPerPage*currentPage) {
+                currentPage += 1;
+            }
+            firstVideoIndex = videoCountPerPage * (currentPage - 1) + 1;
+        }
         var library = document.getElementById("library-container");
         library.innerHTML="<div id='page-controls'><div id='page-text'></div><button id='prev-page' onclick='previousPage()'><p class='text'>Previous</p></button><button id='next-page' onclick='nextPage()'><p class='text'>Next</p></button></div>";
-        x = videoIndex;
-        y = videoIndex+videoCountPerPage-1;
+        x = firstVideoIndex;
+        y = firstVideoIndex+videoCountPerPage-1;
         if(x<0) {x=0;}
         if(y>videoCount) {y=videoCount;}
         for(i=x;i<=y;i++) {
@@ -179,9 +187,7 @@
             setTimeout(addCardEventListeners.bind(null, i), 500);
             if(i==y) {
                 document.getElementById("page-text").innerHTML = "<p class='text'>Page "+currentPage+"/"+pageCount+"</p>";
-                var xhash = window.location.hash;
                 if(xhash!="") {
-                    xhash = xhash.replace("#vid", "");
                     setTimeout(openVideo.bind(null, xhash), 500);
                 }
             }
@@ -189,8 +195,8 @@
     }
     
     function nextPage() {
-        if(videoIndex+videoCountPerPage<videoCount) {
-            videoIndex += videoCountPerPage;
+        if(firstVideoIndex+videoCountPerPage<videoCount) {
+            firstVideoIndex += videoCountPerPage;
             currentPage += 1;
             buildLibrary();
             document.getElementById("page-text").innerHTML = "<p class='text'>Page "+currentPage+"/"+pageCount+"</p>";
@@ -198,8 +204,8 @@
     }
     
     function previousPage() {
-        if(videoIndex-videoCountPerPage>0) {
-            videoIndex -= videoCountPerPage;
+        if(firstVideoIndex-videoCountPerPage>0) {
+            firstVideoIndex -= videoCountPerPage;
             currentPage -= 1;
             buildLibrary();
             document.getElementById("page-text").innerHTML = "<p class='text'>Page "+currentPage+"/"+pageCount+"</p>";
@@ -216,7 +222,8 @@
         document.getElementById("modal").style = "opacity: 0.7; pointer-events: auto;";
         player.unMute();
         if(!playing)player.loadVideoById(videoId);
-        window.location.hash = "vid"+i;
+        //window.location.hash = vid + "i";
+        window.history.pushState({}, "", "#vid"+i);
     }
     
     function closeVideo() {
@@ -226,7 +233,8 @@
         videoPlayer.style = "display: none; pointer-events: none;";
         document.getElementById("modal").style = "opacity: 0; pointer-events: none;";
         endPreview();
-        window.location.hash = "";
+        //window.location.hash = "";
+        window.history.pushState({}, "", " ");
     }
     
     function startPreview(i) {
