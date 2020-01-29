@@ -168,10 +168,13 @@
         for(i=x;i<=y;i++) {
             videoName = nameList[i-1];
             videoImg = imgList[i-1];
-            library.innerHTML += "<div style='background-image: url(&quot;"+videoImg+"&quot;); background-size: contain; background-repeat: no-repeat;' class='video-card' id='vid"+i+"' draggable='false'><p class='text'>"+videoName+"</p>";
-            document.getElementById("vid"+i).addEventListener("click", openVideo(i));
-            document.getElementById("vid"+i).addEventListener("mouseenter", startPreview(i));
-            document.getElementById("vid"+i).addEventListener("mouseleave", endPreview(i));
+            library.innerHTML += "<div id='vid"+i+"' class='video-card' style='background-image: url(&quot;"+videoImg+"&quot;); background-size: contain; background-repeat: no-repeat;' draggable='false'><p class='text'>"+videoName+"</p>";
+            var cardDiv = document.getElementById("vid"+i);
+            setTimeout(function(){
+                cardDiv.addEventListener("click", openVideo(i));
+                cardDiv.addEventListener("mouseenter", startPreview(i));
+                cardDiv.addEventListener("mouseleave", endPreview(i));
+            }, 500);
             if(i==y) {
                 document.getElementById("page-text").innerHTML = "<p class='text'>Page "+currentPage+"/"+pageCount+"</p>";
                 var xhash = window.location.hash;
@@ -246,9 +249,12 @@
     }
     
     function initialize() {
+        //document.getElementById("vldp-container").innerHTML = "<div id='library-container'></div><div id='modal' onclick='closeVideo()'></div><div id='aspect-ratio' onclick='closeVideo()'><div id='iframePlayer'></div></div>";
         document.getElementById("vldp-container").innerHTML = "<div id='library-container'></div><div id='modal'></div><div id='aspect-ratio'><div id='iframePlayer'></div></div>";
-        //document.getElementById("modal").addEventListener("click", closeVideo());
-        //document.getElementById("aspect-ratio").addEventListener("click", closeVideo());
+        setTimeout(function(){
+            document.getElementById("modal").addEventListener("click", closeVideo());
+            document.getElementById("aspect-ratio").addEventListener("click", closeVideo());
+        }, 500);
         videoPlayer = document.getElementById("aspect-ratio");
         buildPlayer();
         sheetrock({
@@ -257,6 +263,6 @@
             callback: authorizationCB
         });
     }
-    
-    setTimeout(initialize, 2000);
+        
+    initialize();
 })();
