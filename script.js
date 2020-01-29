@@ -255,6 +255,4 @@
             callback: authorizationCB
         });
     }
-        
-    initialize();
 })();
