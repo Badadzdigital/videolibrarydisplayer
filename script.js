@@ -252,8 +252,8 @@
         //document.getElementById("vldp-container").innerHTML = "<div id='library-container'></div><div id='modal' onclick='closeVideo()'></div><div id='aspect-ratio' onclick='closeVideo()'><div id='iframePlayer'></div></div>";
         document.getElementById("vldp-container").innerHTML = "<div id='library-container'></div><div id='modal'></div><div id='aspect-ratio'><div id='iframePlayer'></div></div>";
         setTimeout(function(){
-            document.getElementById("modal").addEventListener("click", closeVideo());
-            document.getElementById("aspect-ratio").addEventListener("click", closeVideo());
+            document.getElementById("modal").addEventListener("click", closeVideo);
+            document.getElementById("aspect-ratio").addEventListener("click", closeVideo);
         }, 500);
         videoPlayer = document.getElementById("aspect-ratio");
         buildPlayer();
