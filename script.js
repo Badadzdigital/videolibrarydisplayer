@@ -266,5 +266,5 @@
         });
     }
         
-    initialize();
+    setTimeout(initialize, 1000);
 //})();
