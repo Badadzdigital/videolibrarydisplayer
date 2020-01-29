@@ -247,8 +247,8 @@
     
     function initialize() {
         document.getElementById("vldp-container").innerHTML = "<div id='library-container'></div><div id='modal'></div><div id='aspect-ratio'><div id='iframePlayer'></div></div>";
-        document.getElementById("modal").addEventListener("click", closeVideo());
-        document.getElementById("aspect-ratio").addEventListener("click", closeVideo());
+        //document.getElementById("modal").addEventListener("click", closeVideo());
+        //document.getElementById("aspect-ratio").addEventListener("click", closeVideo());
         videoPlayer = document.getElementById("aspect-ratio");
         buildPlayer();
         sheetrock({
