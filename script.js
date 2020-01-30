@@ -232,7 +232,7 @@
         player.unMute();
         if(!playing)player.loadVideoById(videoId);
         //window.location.hash = vid + "i";
-        window.history.pushState({}, "", nameList[i].replace(new RegExp(" ", "g"), "-"));
+        window.history.pushState({}, "", "#"+nameList[i].replace(new RegExp(" ", "g"), "-"));
     }
     
     function closeVideo() {
