@@ -169,10 +169,19 @@
         var xhash = window.location.hash;
         if(xhash!="") {
             xhash = xhash.replace("#vid", "");
-            while(xhash>videoCountPerPage*currentPage) {
-                currentPage += 1;
+            if(isNaN(xhash)) {
+                xhash = xhash.replace("#", "").toLowerCase();
+                xhash = xhash.replace(new RegExp("-", "g"), " ");
+                var nameListLC = nameList;
+                nameListLC = nameListLC.map(function(e) {return e.toLowerCase();});
+                xhash = nameListLC.indexOf(xhash) + 1;
             }
-            firstVideoIndex = videoCountPerPage * (currentPage - 1) + 1;
+            if(xhash) {
+                while(xhash>videoCountPerPage*currentPage) {
+                    currentPage += 1;
+                }
+                firstVideoIndex = videoCountPerPage * (currentPage - 1) + 1;
+            }
         }
         var library = document.getElementById("library-container");
         library.innerHTML="<div id='page-controls'><div id='page-text'></div><button id='prev-page' onclick='previousPage()'><p class='text'>Previous</p></button><button id='next-page' onclick='nextPage()'><p class='text'>Next</p></button></div>";
@@ -187,7 +196,7 @@
             setTimeout(addCardEventListeners.bind(null, i), 500);
             if(i==y) {
                 document.getElementById("page-text").innerHTML = "<p class='text'>Page "+currentPage+"/"+pageCount+"</p>";
-                if(xhash!="") {
+                if(xhash && xhash!="") {
                     setTimeout(openVideo.bind(null, xhash), 500);
                 }
             }
