@@ -167,4 +167,8 @@
         fill: #888888;
     }
     
+    .name-box .text {
+        margin-top: 0%;
+    }
+    
 }
