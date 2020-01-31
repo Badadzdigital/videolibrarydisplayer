@@ -2,7 +2,6 @@
     z-index: 9999999999;
     position: absolute;
     width: 100%;
-    display: block;
 }
     
 #library-container {
@@ -92,10 +91,6 @@
     transition: all 0.1s ease-in-out;
 }
     
-#next-page:hover {
-    fill: #888888;
-}
-    
 #prev-page {
     position: absolute;
     width: 15%;
@@ -109,10 +104,6 @@
     -ms-transition: all 0.1s ease-in-out;
     -o-transition: all 0.1s ease-in-out;
     transition: all 0.1s ease-in-out;
-}
-    
-#prev-page:hover {
-    fill: #888888;
 }
   
 .text {
@@ -161,4 +152,19 @@
     
 #prev-page .text {
     margin-top: 4%;
+}
+    
+    
+    
+@media screen and (min-device-aspect-ratio: 6/7) {
+/* DESKTOP ONLY */  
+    
+    #next-page:hover {
+        fill: #888888;
+    }
+    
+    #prev-page:hover {
+        fill: #888888;
+    }
+    
 }
