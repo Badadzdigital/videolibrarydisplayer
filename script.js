@@ -191,7 +191,6 @@ function buildLibrary() {
     setTimeout(function(){
         var textScaleRef = document.getElementById("next-page").getBoundingClientRect();
         document.querySelector("#page-text .text").style.fontSize = (textScaleRef.width * 0.2) + "px";
-        document.querySelector("#page-text .text").style.display = "block";
     }, 10);    
     x = firstVideoIndex;
     y = firstVideoIndex+videoCountPerPage-1;
@@ -212,10 +211,11 @@ function buildLibrary() {
     setTimeout(function(){
         var cardScaleRef = document.getElementById("library-container").getBoundingClientRect();
         var cardElements = document.querySelectorAll(".video-card");
+        var cardTextElements = document.querySelectorAll(".name-box .text");
         for(var i1 = 0; i1 < cardElements.length; i1++) {
             cardElements[i1].style.width = ((cardScaleRef.width * 0.019) * 16) + "px";
             cardElements[i1].style.height = ((cardScaleRef.width * 0.019) * 9) + "px";
-            cardElements[i1].style.display = "inline-block";
+            cardTextElements[i1].style.fontSize = (cardScaleRef.width * 0.015) + "px";
         }
     }, 10);
 }
@@ -302,14 +302,14 @@ function initialize() {
 window.onresize = function (e) {  
     var textScaleRef = document.getElementById("next-page").getBoundingClientRect();
     document.querySelector("#page-text .text").style.fontSize = (textScaleRef.width * 0.2) + "px";
-    document.querySelector("#page-text .text").style.display = "block";
     
     var cardScaleRef = document.getElementById("library-container").getBoundingClientRect();
     var cardElements = document.querySelectorAll(".video-card");
+    var cardTextElements = document.querySelectorAll(".name-box .text");
     for(var i1 = 0; i1 < cardElements.length; i1++) {
         cardElements[i1].style.width = ((cardScaleRef.width * 0.019) * 16) + "px";
         cardElements[i1].style.height = ((cardScaleRef.width * 0.019) * 9) + "px";
-        cardElements[i1].style.display = "inline-block";
+        cardTextElements[i1].style.fontSize = (cardScaleRef.width * 0.015) + "px";
     }
 } 
 
