@@ -2,6 +2,7 @@
     z-index: 9999999999;
     position: absolute;
     width: 100%;
+    display: inline-block;
 }
     
 #library-container {
