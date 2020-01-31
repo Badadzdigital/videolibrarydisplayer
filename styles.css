@@ -6,8 +6,8 @@
     
 #library-container {
     position: absolute;
-    width: 80%;
-    left: 10%;
+    width: 90%;
+    left: 5%;
     padding-top: 5%;
     margin-top: 5%;
     padding-bottom: 5%;
@@ -15,13 +15,14 @@
 }
     
 .video-card {
-    display: inline-block;
+    display: none;
     position: relative;
     margin-top: 2%;
     margin-left: 2%;
     margin-bottom: 3%;
-    width: calc(16vmin * 1.5);
-    height: calc(9vmin * 1.5);
+    width: calc(16vmin * 1.7);
+    height: calc(9vmin * 1.7);
+    cursor: pointer;
 }
     
 #aspect-ratio {
@@ -139,7 +140,7 @@
 }
     
 #page-text .text {
-    font-size: 2.4vw;
+    display: none;
     margin-top: 1.1%;
     color: #000000;
     -webkit-transition: all 0s ease-in-out;
