@@ -6,8 +6,8 @@
     
 #library-container {
     position: absolute;
-    width: 90%;
-    left: 5%;
+    width: 80%;
+    left: 10%;
     padding-top: 5%;
     margin-top: 5%;
     padding-bottom: 5%;
@@ -19,9 +19,9 @@
     position: relative;
     margin-top: 2%;
     margin-left: 2%;
-    margin-bottom: 7%;
-    width: calc(16vmin * 2);
-    height: calc(9vmin * 2);
+    margin-bottom: 3%;
+    width: calc(16vmin * 1.5);
+    height: calc(9vmin * 1.5);
 }
     
 #aspect-ratio {
@@ -59,18 +59,18 @@
     transition: all 0.3s ease-in-out;
 }
     
-.nameBox {
+.name-box {
     position: absolute;
     width: 100%;
-    height: 25%;
-    bottom: -25%;
+    height: 22%;
+    bottom: -21.5%;
     overflow: hidden;
-    background-color: #666666;
+    background-color: #333333;
 }
     
 #page-controls {
     position: absolute;
-    top: 0;
+    top: -0.5%;
     left: 0;
     width: 100%;
 }
@@ -78,14 +78,10 @@
 #next-page {
     position: absolute;
     width: 15%;
-    height: 70%;
+    height: auto;
     top: 0;
     right: 20%;
-    background-color: #666666;
-    outline: none;
-    border: none;
-    outline: 1px dotted #BBBBBB;
-    outline-offset: -5px;
+    fill: #000000;
     cursor: pointer;
     -webkit-transition: all 0.1s ease-in-out;
     -moz-transition: all 0.1s ease-in-out;
@@ -95,20 +91,16 @@
 }
     
 #next-page:hover {
-    background-color: #888888;
+    fill: #888888;
 }
     
 #prev-page {
     position: absolute;
     width: 15%;
-    height: 70%;
+    height: auto;
     top: 0;
     left: 20%;
-    background-color: #666666;
-    outline: none;
-    border: none;
-    outline: 1px dotted #BBBBBB;
-    outline-offset: -5px;
+    fill: #000000;
     cursor: pointer;
     -webkit-transition: all 0.1s ease-in-out;
     -moz-transition: all 0.1s ease-in-out;
@@ -118,13 +110,13 @@
 }
     
 #prev-page:hover {
-    background-color: #888888;
+    fill: #888888;
 }
   
 .text {
     font-family: 'Heebo', sans-serif;
     pointer-events: none;
-    color: white;
+    color: #F1F1F1;
     font-size: 2.5vmin;
     text-align: center;
     top: 50%;
@@ -133,18 +125,28 @@
     -ms-transition: all 0.1s ease-in-out;
     -o-transition: all 0.1s ease-in-out;
     transition: all 0.1s ease-in-out;
+    -webkit-user-select: none;        
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
     
-.nameBox .text {
+.name-box .text {
     text-align: center;
-    font-size: 2vmin;
-    text-shadow: 0.15vmin 0.15vmin 0.2vmin rgba(0,0,0,0.5);
-    margin-top: 2.5%;
+    font-size: 1.7vmin;
+    margin-top: 2%;
+    /*text-shadow: 0.15vmin 0.15vmin 0.2vmin rgba(0,0,0,0.5);*/
 }
     
 #page-text .text {
-    margin-top: 0.75%;
-    color: #666666;
+    font-size: 2.4vw;
+    margin-top: 1.1%;
+    color: #000000;
+    -webkit-transition: all 0s ease-in-out;
+    -moz-transition: all 0s ease-in-out;
+    -ms-transition: all 0s ease-in-out;
+    -o-transition: all 0s ease-in-out;
+    transition: all 0s ease-in-out;
 }
     
 #next-page .text {
