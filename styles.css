@@ -167,6 +167,11 @@
         fill: #888888;
     }
     
+}
+
+@media screen and (max-device-aspect-ratio: 6/7) {
+/* MOBILE ONLY*/ 
+    
     .name-box .text {
         margin-top: 0%;
     }
