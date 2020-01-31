@@ -189,9 +189,10 @@ function buildLibrary() {
     var library = document.getElementById("library-container");
     library.innerHTML="<div id='page-controls'><div id='page-text'></div>"+previousPageButton+nextPageButton+"</div>";
     setTimeout(function(){
-        var pageScaleRef = document.getElementById("next-page").getBoundingClientRect();
-        document.querySelector("#page-text .text").style.fontSize = (pageScaleRef.width * 0.2) + "px";
-    }, 50);    
+        var textScaleRef = document.getElementById("next-page").getBoundingClientRect();
+        document.querySelector("#page-text .text").style.fontSize = (textScaleRef.width * 0.2) + "px";
+        document.querySelector("#page-text .text").style.display = "block";
+    }, 10);    
     x = firstVideoIndex;
     y = firstVideoIndex+videoCountPerPage-1;
     if(x<0) {x=0;}
@@ -208,6 +209,15 @@ function buildLibrary() {
             }
         }
     }
+    setTimeout(function(){
+        var cardScaleRef = document.getElementById("library-container").getBoundingClientRect();
+        var cardElements = document.querySelectorAll(".video-card");
+        for(var i1 = 0; i1 < cardElements.length; i1++) {
+            cardElements[i1].style.width = ((cardScaleRef.width * 0.019) * 16) + "px";
+            cardElements[i1].style.height = ((cardScaleRef.width * 0.019) * 9) + "px";
+            cardElements[i1].style.display = "inline-block";
+        }
+    }, 10);
 }
 
 function nextPage() {
@@ -290,8 +300,17 @@ function initialize() {
 }
     
 window.onresize = function (e) {  
-    var pageScaleRef = document.getElementById("next-page").getBoundingClientRect();
-    document.querySelector("#page-text .text").style.fontSize = (pageScaleRef.width * 0.2) + "px";
+    var textScaleRef = document.getElementById("next-page").getBoundingClientRect();
+    document.querySelector("#page-text .text").style.fontSize = (textScaleRef.width * 0.2) + "px";
+    document.querySelector("#page-text .text").style.display = "block";
+    
+    var cardScaleRef = document.getElementById("library-container").getBoundingClientRect();
+    var cardElements = document.querySelectorAll(".video-card");
+    for(var i1 = 0; i1 < cardElements.length; i1++) {
+        cardElements[i1].style.width = ((cardScaleRef.width * 0.019) * 16) + "px";
+        cardElements[i1].style.height = ((cardScaleRef.width * 0.019) * 9) + "px";
+        cardElements[i1].style.display = "inline-block";
+    }
 } 
 
 setTimeout(initialize, 1000);
