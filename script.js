@@ -190,7 +190,7 @@ function buildLibrary() {
     library.innerHTML="<div id='page-controls'><div id='page-text'></div>"+previousPageButton+nextPageButton+"</div>";
     setTimeout(function(){
         var textScaleRef = document.getElementById("next-page").getBoundingClientRect();
-        document.querySelector("#page-text .text").style.fontSize = (textScaleRef.width * 0.2) + "px";
+        document.querySelector("#page-text .txt").style.fontSize = (textScaleRef.width * 0.2) + "px";
     }, 10);    
     x = firstVideoIndex;
     y = firstVideoIndex+videoCountPerPage-1;
@@ -199,10 +199,10 @@ function buildLibrary() {
     for(i=x;i<=y;i++) {
         videoName = nameList[i-1];
         videoImg = imgList[i-1];
-        library.innerHTML += "<div id='vid"+i+"' class='video-card' style='background-image: url(&quot;"+videoImg+"&quot;); background-size: contain; background-repeat: no-repeat;' draggable='false'><div class='name-box'><p class='text'>"+videoName+"</p></div></div>";
+        library.innerHTML += "<div id='vid"+i+"' class='video-card' style='background-image: url(&quot;"+videoImg+"&quot;); background-size: contain; background-repeat: no-repeat;' draggable='false'><div class='name-box'><p class='txt'>"+videoName+"</p></div></div>";
         setTimeout(addCardEventListeners.bind(null, i), 500);
         if(i==y) {
-            document.getElementById("page-text").innerHTML = "<p class='text'>Page "+currentPage+"/"+pageCount+"</p>";
+            document.getElementById("page-text").innerHTML = "<p class='txt'>Page "+currentPage+"/"+pageCount+"</p>";
             if(xhash && xhash!="") {
                 setTimeout(openVideo.bind(null, xhash), 500);
             }
@@ -211,7 +211,7 @@ function buildLibrary() {
     setTimeout(function(){
         var cardScaleRef = document.getElementById("library-container").getBoundingClientRect();
         var cardElements = document.querySelectorAll(".video-card");
-        var cardTextElements = document.querySelectorAll(".name-box .text");
+        var cardTextElements = document.querySelectorAll(".name-box .txt");
         for(var i1 = 0; i1 < cardElements.length; i1++) {
             cardElements[i1].style.width = ((cardScaleRef.width * 0.019) * 16) + "px";
             cardElements[i1].style.height = ((cardScaleRef.width * 0.019) * 9) + "px";
@@ -226,7 +226,7 @@ function nextPage() {
         firstVideoIndex += videoCountPerPage;
         currentPage += 1;
         buildLibrary();
-        document.getElementById("page-text").innerHTML = "<p class='text'>Page "+currentPage+"/"+pageCount+"</p>";
+        document.getElementById("page-text").innerHTML = "<p class='txt'>Page "+currentPage+"/"+pageCount+"</p>";
     }
 }
 
@@ -235,7 +235,7 @@ function previousPage() {
         firstVideoIndex -= videoCountPerPage;
         currentPage -= 1;
         buildLibrary();
-        document.getElementById("page-text").innerHTML = "<p class='text'>Page "+currentPage+"/"+pageCount+"</p>";
+        document.getElementById("page-text").innerHTML = "<p class='txt'>Page "+currentPage+"/"+pageCount+"</p>";
     }
 }
 
@@ -302,11 +302,11 @@ function initialize() {
     
 window.onresize = function (e) {  
     var textScaleRef = document.getElementById("next-page").getBoundingClientRect();
-    document.querySelector("#page-text .text").style.fontSize = (textScaleRef.width * 0.2) + "px";
+    document.querySelector("#page-text .txt").style.fontSize = (textScaleRef.width * 0.2) + "px";
     
     var cardScaleRef = document.getElementById("library-container").getBoundingClientRect();
     var cardElements = document.querySelectorAll(".video-card");
-    var cardTextElements = document.querySelectorAll(".name-box .text");
+    var cardTextElements = document.querySelectorAll(".name-box .txt");
     for(var i1 = 0; i1 < cardElements.length; i1++) {
         cardElements[i1].style.width = ((cardScaleRef.width * 0.019) * 16) + "px";
         cardElements[i1].style.height = ((cardScaleRef.width * 0.019) * 9) + "px";
