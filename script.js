@@ -216,6 +216,7 @@ function buildLibrary() {
             cardElements[i1].style.width = ((cardScaleRef.width * 0.019) * 16) + "px";
             cardElements[i1].style.height = ((cardScaleRef.width * 0.019) * 9) + "px";
             cardTextElements[i1].style.fontSize = (cardScaleRef.width * 0.015) + "px";
+            cardTextElements[i1].style.marginTop = (cardScaleRef.width * 0.0085) + "px";
         }
     }, 10);
 }
@@ -310,6 +311,7 @@ window.onresize = function (e) {
         cardElements[i1].style.width = ((cardScaleRef.width * 0.019) * 16) + "px";
         cardElements[i1].style.height = ((cardScaleRef.width * 0.019) * 9) + "px";
         cardTextElements[i1].style.fontSize = (cardScaleRef.width * 0.015) + "px";
+        cardTextElements[i1].style.marginTop = (cardScaleRef.width * 0.0085) + "px";
     }
 } 
 
