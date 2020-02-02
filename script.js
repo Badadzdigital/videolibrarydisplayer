@@ -171,9 +171,10 @@ function addCardEventListeners(i) {
 function buildLibrary() {
     var xhash = window.location.hash;
     if(xhash!="") {
-        xhash = xhash.replace("#vid", "");
+        //xhash = xhash.replace("#vid", "");
+        xhash = xhash.replace("#", "");
         if(isNaN(xhash)) {
-            xhash = xhash.replace("#", "").toLowerCase();
+            xhash = xhash.toLowerCase();
             xhash = xhash.replace(new RegExp("-", "g"), " ");
             var nameListLC = nameList;
             nameListLC = nameListLC.map(function(e) {return e.toLowerCase();});
@@ -249,7 +250,7 @@ function openVideo(i) {
     document.getElementById("modal").style = "opacity: 0.7; pointer-events: auto;";
     player.unMute();
     if(!playing)player.loadVideoById(videoId);
-    //window.location.hash = vid + "i";
+    //window.location.hash = i;
     window.history.pushState({}, "", "#"+nameList[i-1].replace(new RegExp(" ", "g"), "-"));
 }
 
