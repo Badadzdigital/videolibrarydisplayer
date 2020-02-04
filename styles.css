@@ -126,6 +126,8 @@
     
 .name-box .text {
     position: absolute;
+    width: 100%;
+    height: 100%;
     font-size: 1.7vmin;
     top: 0px;
     /*margin-top: 2.5%;*/
