@@ -199,10 +199,10 @@ function buildLibrary() {
     for(i=x;i<=y;i++) {
         videoName = nameList[i-1];
         videoImg = imgList[i-1];
-        library.innerHTML += "<div id='vid"+i+"' class='video-card' style='background-image: url(&quot;"+videoImg+"&quot;); background-size: contain; background-repeat: no-repeat;' draggable='false'><div class='name-box'><p class='text'>"+videoName+"</p></div></div>";
+        library.innerHTML += "<div id='vid"+i+"' class='video-card' style='background-image: url(&quot;"+videoImg+"&quot;); background-size: contain; background-repeat: no-repeat;' draggable='false'><div class='name-box'><span class='text'>"+videoName+"</span></div></div>";
         setTimeout(addCardEventListeners.bind(null, i), 500);
         if(i==y) {
-            document.getElementById("page-text").innerHTML = "<p class='text'>Page "+currentPage+"/"+pageCount+"</p>";
+            document.getElementById("page-text").innerHTML = "<span class='text'>Page "+currentPage+"/"+pageCount+"</span>";
             if(xhash && xhash!="") {
                 setTimeout(openVideo.bind(null, xhash), 500);
             }
@@ -226,7 +226,7 @@ function nextPage() {
         firstVideoIndex += videoCountPerPage;
         currentPage += 1;
         buildLibrary();
-        document.getElementById("page-text").innerHTML = "<p class='text'>Page "+currentPage+"/"+pageCount+"</p>";
+        document.getElementById("page-text").innerHTML = "<span class='text'>Page "+currentPage+"/"+pageCount+"</span>";
     }
 }
 
@@ -235,7 +235,7 @@ function previousPage() {
         firstVideoIndex -= videoCountPerPage;
         currentPage -= 1;
         buildLibrary();
-        document.getElementById("page-text").innerHTML = "<p class='text'>Page "+currentPage+"/"+pageCount+"</p>";
+        document.getElementById("page-text").innerHTML = "<span class='text'>Page "+currentPage+"/"+pageCount+"</span>";
     }
 }
 
