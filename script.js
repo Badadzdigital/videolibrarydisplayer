@@ -1,4 +1,4 @@
-var videoCountPerPage = 18;/* Number of videos to display per page */
+var videoCountPerPage = 18; /* Number of videos to display per page */
 var spreadsheet = "https://docs.google.com/spreadsheets/d/1pRR4dLWBRF2pwnhdR___EQlnvp2xdErHtKyqhJxnI3Y/edit#gid=0";
 var videoCount;
 var pageCount;
