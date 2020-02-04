@@ -112,6 +112,7 @@
     color: #F1F1F1;
     font-size: 2.5vmin;
     text-align: center;
+    line-height: normal;
     top: 50%;
     -webkit-transition: all 0.1s ease-in-out;
     -moz-transition: all 0.1s ease-in-out;
