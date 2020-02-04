@@ -127,7 +127,8 @@
 .name-box .text {
     text-align: center;
     font-size: 1.7vmin;
-    margin-top: 2.5%;
+    /*margin-top: 2.5%;*/
+    margin-top: 0;
     /*text-shadow: 0.15vmin 0.15vmin 0.2vmin rgba(0,0,0,0.5);*/
     -webkit-transition: all 0s ease-in-out;
     -moz-transition: all 0s ease-in-out;
