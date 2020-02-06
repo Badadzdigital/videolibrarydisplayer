@@ -1,7 +1,9 @@
 var videoCountPerPage = 18;/* Number of videos to display per page */
 var spreadsheet = "https://docs.google.com/spreadsheets/d/1pRR4dLWBRF2pwnhdR___EQlnvp2xdErHtKyqhJxnI3Y/edit#gid=0";
 var videoCount;
+var searchCount;
 var pageCount;
+var searchPageCount;
 var currentPage = 1;
 var videoId;
 var videoName;
@@ -11,10 +13,14 @@ var authorizationList = [];
 var idList = [];
 var nameList = [];
 var imgList = [];
+var searchIdList = [];
+var searchNameList = [];
+var searchImgList = [];
 var firstVideoIndex = 1;
 var lastIndex;
 var modalOpen = 0;
 var playing = 0;
+var searching = 0;
 var i = 0;
 var videoPlayer;
 var iframePlayer;
@@ -220,28 +226,120 @@ function buildLibrary() {
         }
     }, 10);
 }
-
-function nextPage() {
-    if(firstVideoIndex+videoCountPerPage<videoCount) {
-        firstVideoIndex += videoCountPerPage;
-        currentPage += 1;
+    
+function buildSearch() {
+    var xhash = window.location.hash;
+    var library = document.getElementById("library-container");
+    library.innerHTML="<div id='page-controls'><div id='page-text'></div>"+previousPageButton+nextPageButton+"</div>";
+    setTimeout(function(){
+        var textScaleRef = document.getElementById("next-page").getBoundingClientRect();
+        document.querySelector("#page-text .txt").style.fontSize = (textScaleRef.width * 0.2) + "px";
+    }, 10);    
+    x = firstVideoIndex;
+    y = firstVideoIndex+videoCountPerPage-1;
+    if(x<0) {x=0;}
+    if(y>searchCount) {y=searchCount;}
+    for(i=x;i<=y;i++) {
+        videoName = searchNameList[i-1];
+        videoImg = searchImgList[i-1];
+        library.innerHTML += "<div id='vid"+i+"' class='video-card' style='background-image: url(&quot;"+videoImg+"&quot;); background-size: contain; background-repeat: no-repeat;' draggable='false'><div class='name-box'><span class='txt'>"+videoName+"</span></div></div>";
+        setTimeout(addCardEventListeners.bind(null, i), 500);
+        if(i==y) {
+            document.getElementById("page-text").innerHTML = "<span class='txt'>Page "+currentPage+"/"+searchPageCount+"</span>";
+            if(xhash && xhash!="") {
+                setTimeout(openVideo.bind(null, xhash), 500);
+            }
+        }
+    }
+    setTimeout(function(){
+        var cardScaleRef = document.getElementById("library-container").getBoundingClientRect();
+        var cardElements = document.querySelectorAll(".video-card");
+        var cardTextElements = document.querySelectorAll(".name-box .txt");
+        for(var i1 = 0; i1 < cardElements.length; i1++) {
+            cardElements[i1].style.width = ((cardScaleRef.width * 0.019) * 16) + "px";
+            cardElements[i1].style.height = ((cardScaleRef.width * 0.019) * 9) + "px";
+            cardTextElements[i1].style.fontSize = (cardScaleRef.width * 0.015) + "px";
+        }
+    }, 10);
+}
+    
+function search() {
+    searchQuery = document.getElementById("search-bar").value;
+    if(searchQuery == "") {
+        if(searching) {
+            currentPage = 1;
+            firstVideoIndex = 1;
+            searching = 0;
+        }
         buildLibrary();
-        document.getElementById("page-text").innerHTML = "<span class='txt'>Page "+currentPage+"/"+pageCount+"</span>";
+    } else {
+        if(!searching) {
+            currentPage = 1;
+            firstVideoIndex = 1;
+            searching = 1;
+        }
+        searchIdList = [];
+        searchNameList = [];
+        searchImgList = [];
+        //nest this loop inside another loop to iterate through list X where list X is the search query split by whitespace?
+        for(var i1 = 0; i1 < videoCount; i1++) {
+            if(nameList[i1].toLowerCase().includes(searchQuery.toLowerCase())) {
+                searchIdList[searchIdList.length] = idList[i1];
+                searchNameList[searchNameList.length] = nameList[i1];
+                searchImgList[searchImgList.length] = imgList[i1];
+            }
+        }
+        searchCount = searchIdList.length;
+        searchPageCount = Math.ceil(searchCount/videoCountPerPage);
+        buildSearch();
     }
 }
 
-function previousPage() {
-    if(firstVideoIndex-videoCountPerPage>0) {
-        firstVideoIndex -= videoCountPerPage;
-        currentPage -= 1;
-        buildLibrary();
-        document.getElementById("page-text").innerHTML = "<span class='txt'>Page "+currentPage+"/"+pageCount+"</span>";
+function nextPage() {
+    if(searching) {
+        if(firstVideoIndex+videoCountPerPage<searchCount) {
+            firstVideoIndex += videoCountPerPage;
+            currentPage += 1;
+            buildSearch();
+            document.getElementById("page-text").innerHTML = "<span class='txt'>Page "+currentPage+"/"+searchPageCount+"</span>";
+        }
+    } else {
+        if(firstVideoIndex+videoCountPerPage<videoCount) {
+            firstVideoIndex += videoCountPerPage;
+            currentPage += 1;
+            buildLibrary();
+            document.getElementById("page-text").innerHTML = "<span class='txt'>Page "+currentPage+"/"+pageCount+"</span>";
+        }
     }
+    
+}
+
+function previousPage() {
+    if(searching) {
+        if(firstVideoIndex-videoCountPerPage>0) {
+            firstVideoIndex -= videoCountPerPage;
+            currentPage -= 1;
+            buildSearch();
+            document.getElementById("page-text").innerHTML = "<span class='txt'>Page "+currentPage+"/"+searchPageCount+"</span>";
+        }
+    } else {
+        if(firstVideoIndex-videoCountPerPage>0) {
+            firstVideoIndex -= videoCountPerPage;
+            currentPage -= 1;
+            buildLibrary();
+            document.getElementById("page-text").innerHTML = "<span class='txt'>Page "+currentPage+"/"+pageCount+"</span>";
+        }
+    }
+    
 }
 
 function openVideo(i) {
     modalOpen = 1;
-    videoId = idList[i-1];
+    if(searching) {
+        videoId = searchIdList[i-1];
+    } else {
+        videoId = idList[i-1];
+    }
     //var tempURL = document.getElementById("iframePlayer").src.toString();
     //document.getElementById("iframePlayer").src = tempURL.replace("controls=0", "controls=1");
     videoPlayer.style = "pointer-events: auto; width: calc(16vmin * 5); height: calc(9vmin * 5); display: block; position: fixed;";
@@ -250,7 +348,11 @@ function openVideo(i) {
     player.unMute();
     if(!playing)player.loadVideoById(videoId);
     //window.location.hash = i;
-    window.history.pushState({}, "", "#"+nameList[i-1].replace(new RegExp(" ", "g"), "-"));
+    if(searching) {
+        window.history.pushState({}, "", "#"+searchNameList[i-1].replace(new RegExp(" ", "g"), "-"));
+    } else {
+        window.history.pushState({}, "", "#"+nameList[i-1].replace(new RegExp(" ", "g"), "-"));
+    }
 }
 
 function closeVideo() {
@@ -266,7 +368,11 @@ function closeVideo() {
 
 function startPreview(i) {
     if(!modalOpen) {
-        videoId = idList[i-1];
+        if(searching) {
+            videoId = searchIdList[i-1];
+        } else {
+            videoId = idList[i-1];
+        }
         lastIndex = i;
         var boundingBox = document.getElementById("vid"+i).getBoundingClientRect();
         var containerBoundingBox = document.getElementById("vldp-container").getBoundingClientRect();
@@ -286,10 +392,11 @@ function endPreview(i) {
 }
 
 function initialize() {
-    document.getElementById("vldp-container").innerHTML = "<div id='library-container'></div><div id='modal'></div><div id='aspect-ratio'><div id='iframePlayer'></div></div>";
+    document.getElementById("vldp-container").innerHTML = "<div id='library-container'></div><input id='search-bar' type='text' placeholder='search for a video' tabindex='-1'><div id='modal'></div><div id='aspect-ratio'><div id='iframePlayer'></div></div>";
     setTimeout(function(){
         document.getElementById("modal").addEventListener("click", closeVideo);
         document.getElementById("aspect-ratio").addEventListener("click", closeVideo);
+        document.getElementById("search-bar").addEventListener("keyup", search);
     }, 500);
     videoPlayer = document.getElementById("aspect-ratio");
     buildPlayer();
@@ -300,10 +407,9 @@ function initialize() {
     });
 }
     
-window.onresize = function (e) {  
+window.onresize = function(e) {  
     var textScaleRef = document.getElementById("next-page").getBoundingClientRect();
     document.querySelector("#page-text .txt").style.fontSize = (textScaleRef.width * 0.2) + "px";
-    
     var cardScaleRef = document.getElementById("library-container").getBoundingClientRect();
     var cardElements = document.querySelectorAll(".video-card");
     var cardTextElements = document.querySelectorAll(".name-box .txt");
@@ -312,6 +418,6 @@ window.onresize = function (e) {
         cardElements[i1].style.height = ((cardScaleRef.width * 0.019) * 9) + "px";
         cardTextElements[i1].style.fontSize = (cardScaleRef.width * 0.015) + "px";
     }
-} 
+}
 
 setTimeout(initialize, 1000);
