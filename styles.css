@@ -4,12 +4,40 @@
     width: 100%;
 }
     
+#search-bar {
+    position: absolute;
+    top: 0;
+    width: 80%;
+    left: 10%;
+    margin-top: 2%;
+    font-size: 2.5vmin;
+    line-height: normal;
+    font-family: 'Heebo', sans-serif;
+    color: #000000;
+    text-align: center;
+    background-color: rgba(255,255,255,0);
+    border: 0.2vmin solid #000000;
+    border-radius: 9999px;
+}
+    
+::placeholder {
+    color: #000000;
+}
+    
+#search-bar:focus {
+    outline: none;
+}
+    
+#search-bar:focus::placeholder {
+    color: rgba(0,0,0,0);
+}
+    
 #library-container {
     position: absolute;
     width: 90%;
     left: 5%;
     padding-top: 5%;
-    margin-top: 5%;
+    margin-top: 10%;
     padding-bottom: 5%;
     margin-bottom: 5%;
 }
