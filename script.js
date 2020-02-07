@@ -360,16 +360,20 @@ function openVideo(i) {
     modalOpen = 1;
     if(searching) {
         videoId = searchIdList[i-1];
+        videoName = searchNameList[i-1];
     } else {
         videoId = idList[i-1];
+        videoName = nameList[i-1];
     }
     videoPlayer.style = "pointer-events: auto; width: calc(16vmin * 5); height: calc(9vmin * 5); display: block; position: fixed;";
-    document.getElementById("player-controls").style = "display: block";
+    document.getElementById("player-controls").style.display = "block";
+    document.getElementById("title-box").style.display = "block";
     document.getElementById("iframePlayer").style = "left: -50%;";
     document.getElementById("modal").style = "opacity: 0.7; pointer-events: auto;";
     player.unMute();
     player.muted = false;
     document.getElementById("toggle-audio").innerHTML = audioIcon;
+    document.getElementById("title-box").innerHTML = "<span class='txt'>"+videoName+"</span>";
     if(!playing)player.loadVideoById(videoId);
     //window.location.hash = i;
     if(searching) {
@@ -382,8 +386,6 @@ function openVideo(i) {
 function closeVideo() {
     modalOpen = 0;
     tracking = 0;
-    //var tempURL = document.getElementById("iframePlayer").src.toString();
-    //document.getElementById("iframePlayer").src = tempURL.replace("controls=1", "controls=0");
     videoPlayer.style = "display: none; pointer-events: none;";
     document.getElementById("modal").style = "opacity: 0; pointer-events: none;";
     document.getElementById("scrubber-preview").style.width = "0%";
@@ -405,7 +407,8 @@ function startPreview(i) {
         var boundingBox = document.getElementById("vid"+i).getBoundingClientRect();
         var containerBoundingBox = document.getElementById("vldp-container").getBoundingClientRect();
         videoPlayer.style = "pointer-events: none; width: "+boundingBox.width+"px; height: "+boundingBox.height+"px; left: "+Math.round((window.scrollX + boundingBox.left) - (window.scrollX + containerBoundingBox.left))+"px; top: "+Math.round((window.scrollY + boundingBox.top) - (window.scrollY + containerBoundingBox.top))+"px; display: block; position: absolute;";
-        document.getElementById("player-controls").style = "display: none";
+        document.getElementById("player-controls").style.display = "none";
+        document.getElementById("title-box").style.display = "none";
         document.getElementById("iframePlayer").style = "left: 0;";
         player.mute();
         player.muted = true;
@@ -458,9 +461,11 @@ function track(event) {
     var targetTime = targetPerc * player.getDuration() / 100;
     if(tracking) {
         player.seekTo(targetTime);
+        document.getElementById("scrubber").style.width = targetPerc + "%";
     }
     document.getElementById("scrubber-preview").style.width = targetPerc + "%";
     targetTimeText = "&nbsp;&nbsp;->&nbsp;&nbsp;" + formatTime(targetTime);
+    document.querySelector("#timeline .txt").innerHTML = formatTime(player.getCurrentTime()) + " / " + formatTime(player.getDuration()) + targetTimeText;
 }
     
 function stopTrack(event) {
@@ -502,7 +507,7 @@ function formatTime(time){
 }
 
 function initialize() {
-    document.getElementById("vldp-container").innerHTML = "<div id='library-container'></div><input id='search-bar' type='text' placeholder='search for a video' tabindex='-1'><div id='modal'></div><div id='aspect-ratio'><div id='iframePlayer'></div><div id='player-controls'><div id='toggle-play'>"+pauseIcon+"</div><div id='toggle-audio'>"+audioIcon+"</div><div id='timeline'>"+progressBar+"<div id='scrubber'>"+progressBar+"</div><div id='scrubber-preview'>"+progressBar+"</div><span class='txt'>0:00 / 0:00</span></div></div></div>";
+    document.getElementById("vldp-container").innerHTML = "<div id='library-container'></div><input id='search-bar' type='text' placeholder='search for a video' tabindex='-1'><div id='modal'></div><div id='aspect-ratio'><div id='iframePlayer'></div><div id='title-box'></div><div id='player-controls'><div id='toggle-play'>"+pauseIcon+"</div><div id='toggle-audio'>"+audioIcon+"</div><div id='timeline'>"+progressBar+"<div id='scrubber'>"+progressBar+"</div><div id='scrubber-preview'>"+progressBar+"</div><span class='txt'>0:00 / 0:00</span></div></div></div>";
     setTimeout(function(){
         document.getElementById("modal").addEventListener("mousedown", closeVideo);
         document.getElementById("aspect-ratio").addEventListener("mousedown", closeVideo);
