@@ -86,7 +86,8 @@ function onPlayerReady(event) {
 function onPlayerStateChange(event) {
     switch (event.data) {
         case YT.PlayerState.UNSTARTED:
-            //console.log('unstarted');
+            document.getElementById("player-controls").style.display = "none";
+            console.log('unstarted');
             playing = 0;
             break;
         case YT.PlayerState.ENDED:
@@ -95,7 +96,11 @@ function onPlayerStateChange(event) {
             break;
         case YT.PlayerState.PLAYING:
             //console.log('playing');
-            if(!playing && !modalOpen) {player.seekTo(1,true);}
+            if(!playing && !modalOpen) {
+                player.seekTo(1,true);
+            } else if(modalOpen) {
+                document.getElementById("player-controls").style.display = "block";
+            }
             playing = 1;
             paused = 0;
             document.getElementById("toggle-play").innerHTML = pauseIcon;
@@ -366,7 +371,6 @@ function openVideo(i) {
         videoName = nameList[i-1];
     }
     videoPlayer.style = "pointer-events: auto; width: calc(16vmin * 5); height: calc(9vmin * 5); display: block; position: fixed;";
-    document.getElementById("player-controls").style.display = "block";
     document.getElementById("title-box").style.display = "block";
     document.getElementById("iframePlayer").style = "left: -50%;";
     document.getElementById("modal").style = "opacity: 0.7; pointer-events: auto;";
@@ -374,7 +378,10 @@ function openVideo(i) {
     player.muted = false;
     document.getElementById("toggle-audio").innerHTML = audioIcon;
     document.getElementById("title-box").innerHTML = "<span class='txt'>"+videoName+"</span>";
-    if(!playing)player.loadVideoById(videoId);
+    document.getElementById("player-controls").style.display = "block";
+    if(!playing) {
+        player.loadVideoById(videoId);
+    }
     //window.location.hash = i;
     if(searching) {
         window.history.pushState({}, "", "#"+searchNameList[i-1].replace(new RegExp(" ", "g"), "-"));
