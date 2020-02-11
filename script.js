@@ -88,7 +88,6 @@ function onPlayerStateChange(event) {
     switch (event.data) {
         case YT.PlayerState.UNSTARTED:
             document.getElementById("player-controls").style.display = "none";
-            console.log('unstarted');
             playing = 0;
             break;
         case YT.PlayerState.ENDED:
@@ -388,13 +387,15 @@ function openVideo(i) {
     modalOpen = 1;
     videoPlayer.style = "pointer-events: auto; width: calc(16vmin * 5); height: calc(9vmin * 5); display: block; position: fixed;";
     document.getElementById("title-box").style.display = "block";
-    document.getElementById("iframePlayer").style = "left: -50%;";
+    document.getElementById("iframePlayer").style = "left: -50%; filter: drop-shadow(0 0 10vmin rgba(0,0,0,1));";
     document.getElementById("modal").style = "opacity: 0.7; pointer-events: auto;";
-    player.unMute();
-    player.muted = false;
+    document.getElementById("library-container").style = "filter: blur(1vmin);";
+    document.getElementById("search-bar").style = "filter: blur(1vmin);";
     document.getElementById("toggle-audio").innerHTML = audioIcon;
     document.getElementById("title-box").innerHTML = "<span class='txt'>"+videoName+"</span>";
     document.getElementById("player-controls").style.display = "block";
+    player.unMute();
+    player.muted = false;
     if(!playing) {
         player.loadVideoById(videoId);
     }
@@ -410,6 +411,9 @@ function closeVideo() {
     modalOpen = 0;
     tracking = 0;
     videoPlayer.style = "display: none; pointer-events: none;";
+    document.getElementById("iframePlayer").style = "filter: none;";
+    document.getElementById("library-container").style = "filter: blur(0px);";
+    document.getElementById("search-bar").style = "filter: blur(0px);";
     document.getElementById("modal").style = "opacity: 0; pointer-events: none;";
     document.getElementById("scrubber-preview").style.width = "0%";
     document.getElementById("scrubber").style.width = "0%";
