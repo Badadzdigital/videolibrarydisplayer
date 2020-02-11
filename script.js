@@ -26,6 +26,7 @@ var paused = 0;
 var searching = 0;
 var tracking = 0;
 var i = 0;
+var mobile = 0;
 var videoPlayer;
 var iframePlayer;
 
@@ -144,7 +145,18 @@ function extractText(test, delim1, delim2) {
 /*---------------------OTHER FUNCTIONS---------------------*/
 /*---------------------OTHER FUNCTIONS---------------------*/
 /*---------------------OTHER FUNCTIONS---------------------*/
-
+    
+function getDevice() {
+    const mq = window.matchMedia("(max-device-aspect-ratio: 6/7)");
+    if (mq.matches) {
+        /*MOBILE*/
+        mobile = 1;
+    } else {
+        /*DESKTOP*/
+        mobile = 0;
+    }
+}
+    
 function authorizationCB(error, options, response) {
     theData.response = response.html;
     var rawList = extractText(JSON.stringify(theData), "<td>", "</td");
@@ -362,6 +374,9 @@ function previousPage() {
 }
 
 function openVideo(i) {
+    if(mobile) {
+        return;
+    }
     modalOpen = 1;
     if(searching) {
         videoId = searchIdList[i-1];
@@ -514,6 +529,7 @@ function formatTime(time){
 }
 
 function initialize() {
+    getDevice();
     document.getElementById("vldp-container").innerHTML = "<div id='library-container'></div><input id='search-bar' type='text' placeholder='search for a video' tabindex='-1'><div id='modal'></div><div id='aspect-ratio'><div id='iframePlayer'></div><div id='title-box'></div><div id='player-controls'><div id='toggle-play'>"+pauseIcon+"</div><div id='toggle-audio'>"+audioIcon+"</div><div id='timeline'>"+progressBar+"<div id='scrubber'>"+progressBar+"</div><div id='scrubber-preview'>"+progressBar+"</div><span class='txt'>0:00 / 0:00</span></div></div></div>";
     setTimeout(function(){
         document.getElementById("modal").addEventListener("mousedown", closeVideo);
