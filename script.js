@@ -374,10 +374,6 @@ function previousPage() {
 }
 
 function openVideo(i) {
-    if(mobile) {
-        return;
-    }
-    modalOpen = 1;
     if(searching) {
         videoId = searchIdList[i-1];
         videoName = searchNameList[i-1];
@@ -385,6 +381,11 @@ function openVideo(i) {
         videoId = idList[i-1];
         videoName = nameList[i-1];
     }
+    if(mobile) {
+        player.loadVideoById(videoId);
+        return;
+    }
+    modalOpen = 1;
     videoPlayer.style = "pointer-events: auto; width: calc(16vmin * 5); height: calc(9vmin * 5); display: block; position: fixed;";
     document.getElementById("title-box").style.display = "block";
     document.getElementById("iframePlayer").style = "left: -50%;";
