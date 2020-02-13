@@ -382,7 +382,6 @@ function openVideo(i) {
     }
     if(mobile) {
         player.loadVideoById(videoId);
-        setTimeout(function(){document.getElementById("vid"+i).click();}, 500);
         return;
     }
     modalOpen = 1;
