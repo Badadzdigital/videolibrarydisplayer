@@ -251,9 +251,6 @@ function buildLibrary() {
             document.getElementById("page-text").innerHTML = "<span class='txt'>Page "+currentPage+"/"+pageCount+"</span>";
             if(xhash && xhash!="") {
                 setTimeout(openVideo.bind(null, xhash), 500);
-                if(mobile) {
-                    setTimeout(function(){document.getElementById("vid"+xhash).click();}, 1000);
-                }
             }
         }
     }
@@ -385,6 +382,7 @@ function openVideo(i) {
     }
     if(mobile) {
         player.loadVideoById(videoId);
+        setTimeout(function(){document.getElementById("vid"+i).click();}, 500);
         return;
     }
     modalOpen = 1;
