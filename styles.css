@@ -270,11 +270,30 @@
     position: absolute;
     fill: #FFFFFF;
 }
+    
+#toggle-fullscreen {
+    position: absolute;
+    right: 0px;
+    width: 5vmin;
+    height: 5vmin;
+    pointer-events: auto;
+    cursor: pointer;
+    -webkit-transition: all 0.1s ease-in-out;
+    -moz-transition: all 0.1s ease-in-out;
+    -ms-transition: all 0.1s ease-in-out;
+    -o-transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;
+}   
+    
+#toggle-fullscreen svg {
+    position: absolute;
+    fill: #FFFFFF;
+}
 
 #timeline {
     position: absolute;
-    left: 10vmin;
-    width: 70vmin;
+    left: 11vmin;
+    width: 63vmin;
     height: 5vmin;
     pointer-events: auto;
     cursor: pointer;
