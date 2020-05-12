@@ -42,6 +42,8 @@ var audioIcon = "<svg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/s
     
 var muteIcon = "<svg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 256 256' style='enable-background:new 0 0 256 256;' xml:space='preserve'><path d='M213.6785,128c0-39.3494-28.6978-71.9812-66.3022-78.1476v19.0419c27.2085,5.916,47.5909,30.1246,47.5909,59.1058 c0,12.0772-3.5492,23.3188-9.6474,32.7599l13.4677,13.4677C208.157,161.2203,213.6785,145.257,213.6785,128z'/><path d='M176.8591,128c0-18.9102-12.3843-34.9222-29.4828-40.3837v35.2002l24.7188,24.7188 C175.1375,141.6895,176.8591,135.0466,176.8591,128z'/><polygon points='135.4669,48.7885 104.2128,79.653 135.4669,110.9071 '/><path d='M207.9975,197.4377L58.5623,48.0024L48.0025,58.5622l38.5404,38.5405l-3.0103,2.9727H42.3216v55.8492h41.211 l51.9343,51.2869v-61.1848l11.9094,11.9094v10.4476c2.5525-0.8153,4.9916-1.879,7.308-3.1396l13.1841,13.1841 c-6.1365,4.0746-13.0576,7.061-20.4922,8.6776v19.0419c12.5469-2.0575,24.0867-7.0795,33.9122-14.2994l16.1493,16.1493 L207.9975,197.4377z'/></svg>";
     
+var fullscreenIcon = "<svg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 256 256' style='enable-background:new 0 0 256 256;' xml:space='preserve'><style type='text/css'> .st0{fill:#FFFFFF;}</style><polygon class='st0' points='70.738,114.39 47.3338,114.39 47.3338,47.3338 114.39,47.3338 114.39,70.738 70.738,70.738 '/><polygon class='st0' points='208.6667,208.6667 141.6096,208.6667 141.6096,185.2625 185.2625,185.2625 185.2625,141.6096 208.6667,141.6096 '/><polygon class='st0' points='208.6667,114.39 185.2625,114.39 185.2625,70.738 141.6096,70.738 141.6096,47.3338 208.6667,47.3338 '/><polygon class='st0' points='114.39,208.6667 47.3338,208.6667 47.3338,141.6096 70.738,141.6096 70.738,185.2625 114.39,185.2625 '/></svg>";
+    
 var progressBar = "<svg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 256 256' style='enable-background:new 0 0 256 256;' xml:space='preserve' preserveAspectRatio='none'><rect y='161.4064' width='256' height='33.1872'/></svg>";
 
 /*---------------------VIDEOPLAYER-RELATED FUNCTIONS---------------------*/
@@ -475,6 +477,15 @@ function toggleAudio(event) {
     }
 }
     
+function toggleFullscreen(event) {
+    event.stopPropagation();
+    var theplayer = document.getElementById("iframePlayer");
+    var requestFullScreen = theplayer.requestFullScreen || theplayer.mozRequestFullScreen || theplayer.webkitRequestFullScreen;
+    if (requestFullScreen) {
+        requestFullScreen.bind(theplayer)();
+    }
+}
+    
 function startTrack(event) {
     event.stopPropagation();
     tracking = 1;
@@ -535,13 +546,14 @@ function formatTime(time){
 
 function initialize() {
     getDevice();
-    document.getElementById("vldp-container").innerHTML = "<div id='library-container'></div><input id='search-bar' type='text' placeholder='search for a video' tabindex='-1'><div id='modal'></div><div id='aspect-ratio'><div id='iframePlayer'></div><div id='title-box'></div><div id='player-controls'><div id='toggle-play'>"+pauseIcon+"</div><div id='toggle-audio'>"+audioIcon+"</div><div id='timeline'>"+progressBar+"<div id='scrubber'>"+progressBar+"</div><div id='scrubber-preview'>"+progressBar+"</div><span class='txt'>0:00 / 0:00</span></div></div></div>";
+    document.getElementById("vldp-container").innerHTML = "<div id='library-container'></div><input id='search-bar' type='text' placeholder='search for a video' tabindex='-1'><div id='modal'></div><div id='aspect-ratio'><div id='iframePlayer'></div><div id='title-box'></div><div id='player-controls'><div id='toggle-play'>"+pauseIcon+"</div><div id='toggle-audio'>"+audioIcon+"</div><div id='toggle-fullscreen'>"+fullscreenIcon+"</div><div id='timeline'>"+progressBar+"<div id='scrubber'>"+progressBar+"</div><div id='scrubber-preview'>"+progressBar+"</div><span class='txt'>0:00 / 0:00</span></div></div></div>";
     setTimeout(function(){
         document.getElementById("modal").addEventListener("mousedown", closeVideo);
         document.getElementById("aspect-ratio").addEventListener("mousedown", closeVideo);
         document.getElementById("search-bar").addEventListener("keyup", search);
         document.getElementById("toggle-play").addEventListener("mousedown", togglePlay, false);
         document.getElementById("toggle-audio").addEventListener("mousedown", toggleAudio, false);
+        document.getElementById("toggle-fullscreen").addEventListener("mousedown", toggleFullscreen, false);
         document.getElementById("timeline").addEventListener("mousedown", startTrack, false);
         document.getElementById("timeline").addEventListener("mousemove", track, false);
         document.getElementById("timeline").addEventListener("mouseleave", stopTrack, false);
