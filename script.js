@@ -383,6 +383,8 @@ function openVideo(i) {
         videoName = nameList[i-1];
     }
     if(mobile) {
+        player.mute();
+        player.muted = true;
         player.loadVideoById(videoId);
         var theplayer = document.getElementById("iframePlayer");
         var requestFullScreen = theplayer.requestFullScreen || theplayer.mozRequestFullScreen || theplayer.webkitRequestFullScreen;
@@ -390,6 +392,10 @@ function openVideo(i) {
             requestFullScreen.bind(theplayer)();
         }
         return;
+    }
+    else {
+        player.unMute();
+        player.muted = false;
     }
     modalOpen = 1;
     videoPlayer.style = "pointer-events: auto; width: calc(16vmin * 5); height: calc(9vmin * 5); display: block; position: fixed;";
@@ -401,8 +407,6 @@ function openVideo(i) {
     document.getElementById("toggle-audio").innerHTML = audioIcon;
     document.getElementById("title-box").innerHTML = "<span class='txt'>"+videoName+"</span>";
     document.getElementById("player-controls").style.display = "block";
-    player.unMute();
-    player.muted = false;
     if(!playing) {
         player.loadVideoById(videoId);
     }
