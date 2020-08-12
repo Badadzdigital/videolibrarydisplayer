@@ -384,6 +384,11 @@ function openVideo(i) {
     }
     if(mobile) {
         player.loadVideoById(videoId);
+        var theplayer = document.getElementById("iframePlayer");
+        var requestFullScreen = theplayer.requestFullScreen || theplayer.mozRequestFullScreen || theplayer.webkitRequestFullScreen;
+        if (requestFullScreen) {
+            requestFullScreen.bind(theplayer)();
+        }
         return;
     }
     modalOpen = 1;
