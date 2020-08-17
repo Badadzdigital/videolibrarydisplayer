@@ -382,7 +382,7 @@ function openVideo(i) {
         videoId = idList[i-1];
         videoName = nameList[i-1];
     }
-    if(mobile) {
+    /*if(mobile) {
         player.mute();
         player.muted = true;
         player.loadVideoById(videoId);
@@ -396,7 +396,7 @@ function openVideo(i) {
     else {
         player.unMute();
         player.muted = false;
-    }
+    }*/
     modalOpen = 1;
     videoPlayer.style = "pointer-events: auto; width: calc(16vmin * 5); height: calc(9vmin * 5); display: block; position: fixed;";
     document.getElementById("title-box").style.display = "block";
