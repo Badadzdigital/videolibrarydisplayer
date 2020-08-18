@@ -397,6 +397,10 @@ function openVideo(i) {
         player.unMute();
         player.muted = false;
     }*/
+    
+    player.unMute();
+    player.muted = false;
+    
     modalOpen = 1;
     videoPlayer.style = "pointer-events: auto; width: calc(16vmin * 5); height: calc(9vmin * 5); display: block; position: fixed;";
     document.getElementById("title-box").style.display = "block";
