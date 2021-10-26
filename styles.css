@@ -11,6 +11,7 @@
     pointer-events: none;
     color: #F1F1F1;
     font-size: 2.5vmin;
+    letter-spacing: 0.1vmin;
     text-align: center;
     -webkit-transition: all 0.1s ease-in-out;
     -moz-transition: all 0.1s ease-in-out;
