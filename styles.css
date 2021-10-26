@@ -143,6 +143,7 @@
     height: 100%;
     font-size: 1.7vmin;
     letter-spacing: normal;
+    letter-spacing: 1vmin;
     top: 20%;
     -webkit-transition: all 0s ease-in-out;
     -moz-transition: all 0s ease-in-out;
