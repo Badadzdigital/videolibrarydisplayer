@@ -30,16 +30,16 @@
 #search-bar {
     position: absolute;
     top: 0;
-    width: 80%;
+    width: 50%;
     left: 10%;
     margin-top: 2%;
     font-size: 2.5vmin;
     line-height: normal;
     font-family: 'Heebo', sans-serif;
-    color: #000000;
+    color: #FFFFFF;
     text-align: center;
-    background-color: rgba(255,255,255,0);
-    border: 0.2vmin solid #000000;
+    background-color: rgba(51,51,51,0.8);
+    border: 0.3vw solid rgba(51,51,51,0.3);
     border-radius: 9999px;
     filter: blur(0px);
     -webkit-transition: all 0.2s ease-in-out;
@@ -47,11 +47,23 @@
     -ms-transition: all 0.2s ease-in-out;
     -o-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out;
+    -webkit-backdrop-filter: blur(1vmin);
+    -moz-backdrop-filter: blur(1vmin);
+    -ms-backdrop-filter: blur(1vmin);
+    backdrop-filter: blur(1vmin);
 }
     
 ::placeholder {
+    -webkit-transition: color 0.2s ease-in-out;
+    -moz-transition: color 0.2s ease-in-out;
+    -ms-transition: color 0.2s ease-in-out;
+    -o-transition: color 0.2s ease-in-out;
+    transition: color 0.2s ease-in-out;
+    -webkit-user-select: none;        
+    -moz-user-select: none;
+    -ms-user-select: none;
     user-select: none;
-    color: #000000;
+    color: #FFFFFF;
 }
     
 #search-bar:focus {
@@ -59,7 +71,100 @@
 }
     
 #search-bar:focus::placeholder {
-    color: rgba(0,0,0,0);
+    width: 0px;
+}
+    
+#search-icon {
+    position: absolute;
+    top: 0;
+    width: 2.8%;
+    left: 11%;
+    margin-top: 3%;
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+#cancel-icon {
+    display:none;
+    position: absolute;
+    top: 0;
+    width: 3.2%;
+    left: 55.5%;
+    margin-top: 2.8%;
+}
+    
+/*---------------------CATEGORY FILTER---------------------*/
+/*---------------------CATEGORY FILTER---------------------*/
+/*---------------------CATEGORY FILTER---------------------*/
+    
+#category-dropdown {
+    position: absolute;
+    width: 27%;
+    right: 10%;
+    margin-top: 2%;
+    font-size: 2.5vmin;
+    line-height: normal;
+    font-family: 'Heebo', sans-serif;
+    color: #FFFFFF;
+    text-align: center;
+    cursor: pointer;
+}
+
+#category-dropdown-button {
+    position: absolute;
+    width: 100%;
+    background-color: rgba(51,51,51,0.8);
+    border: 0.3vw solid rgba(51,51,51,0.3);
+    border-radius: 9999px;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    -webkit-user-select: none;        
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-backdrop-filter: blur(1vmin);
+    -moz-backdrop-filter: blur(1vmin);
+    -ms-backdrop-filter: blur(1vmin);
+    backdrop-filter: blur(1vmin);
+}
+
+#category-dropdown-options {
+    right: 0;
+    margin-top: 20%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    padding-left: 10%;
+    padding-right: 10%;
+    position: absolute;
+    display: none;
+    list-style-type: none;
+    background-color: rgba(51,51,51,0.8);
+    border: 0.3vw solid rgba(51,51,51,0.3);
+    border-radius: 2vw;
+    -webkit-user-select: none;        
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-backdrop-filter: blur(1vmin);
+    -moz-backdrop-filter: blur(1vmin);
+    -ms-backdrop-filter: blur(1vmin);
+    backdrop-filter: blur(1vmin);
+}
+    
+#category-dropdown-icon {
+    position: absolute;
+    width: 7%;
+    margin-top: 6%;
+    right: 3%;
+    -webkit-transition: all 0.1s ease-in-out;
+    -moz-transition: all 0.1s ease-in-out;
+    -ms-transition: all 0.1s ease-in-out;
+    -o-transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;
+    pointer-events: none;
 }
     
 /*---------------------LIBRARY AND PLAYER---------------------*/
@@ -91,6 +196,8 @@
     width: calc(16vmin * 1.7);
     height: calc(9vmin * 1.7);
     cursor: pointer;
+    border-top-left-radius: 0.5vw;
+    border-top-right-radius: 0.5vw;
 }
     
 #aspect-ratio {
@@ -110,6 +217,8 @@
     top: 0;
     left: -50%;
     filter: none;
+    border-top-left-radius: 0.5vw;
+    border-top-right-radius: 0.5vw;
 }
   
 #modal {
@@ -135,7 +244,13 @@
     height: 22%;
     bottom: -21.5%;
     overflow: hidden;
-    background-color: #333333;
+    background-color: rgba(51,51,51,0.9);
+    border-bottom-left-radius: 0.5vw;
+    border-bottom-right-radius: 0.5vw;
+    -webkit-backdrop-filter: blur(1vmin);
+    -moz-backdrop-filter: blur(1vmin);
+    -ms-backdrop-filter: blur(1vmin);
+    backdrop-filter: blur(1vmin);
 }
     
 .name-box .txt {
@@ -175,7 +290,11 @@
     top: -0.5%;
     left: 0;
     width: 100%;
-}
+}   
+    
+#page-controls-background {
+    
+}  
     
 #next-page {
     position: absolute;
@@ -183,40 +302,89 @@
     height: auto;
     top: 0;
     right: 20%;
-    fill: #000000;
     cursor: pointer;
     -webkit-transition: all 0.1s ease-in-out;
     -moz-transition: all 0.1s ease-in-out;
     -ms-transition: all 0.1s ease-in-out;
     -o-transition: all 0.1s ease-in-out;
     transition: all 0.1s ease-in-out;
+    font-size: 2.5vmin;
+    line-height: normal;
+    font-family: 'Heebo', sans-serif;
+    color: #FFFFFF;
+    text-align: center;
+    background-color: rgba(255,255,255,0);;
+    border: 0.3vw solid rgba(255,255,255,0);
+    outline: 0.25vw solid rgba(255,255,255,1);
+    outline-offset: -0.8vw;
+    border-radius: 1vw;
+    filter: blur(0px);
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none; 
 }
     
-#prev-page {
+#previous-page {
     position: absolute;
     width: 15%;
     height: auto;
     top: 0;
     left: 20%;
-    fill: #000000;
     cursor: pointer;
     -webkit-transition: all 0.1s ease-in-out;
     -moz-transition: all 0.1s ease-in-out;
     -ms-transition: all 0.1s ease-in-out;
     -o-transition: all 0.1s ease-in-out;
     transition: all 0.1s ease-in-out;
+    font-size: 2.5vmin;
+    line-height: normal;
+    font-family: 'Heebo', sans-serif;
+    color: #FFFFFF;
+    text-align: center;
+    background-color: rgba(255,255,255,0);;
+    border: 0.3vw solid rgba(255,255,255,0);
+    outline: 0.25vw solid rgba(255,255,255,1);
+    outline-offset: -0.8vw;
+    border-radius: 1vw;
+    filter: blur(0px);
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none; 
 }
     
 #page-text .txt {
-    margin-top: 1.1%;
-    top: 50%;
-    left: 43%;
-    color: #000000;
+    position: absolute;
+    line-height: normal;
+    text-align: center;
+    left: 18.5%;
+    width: 62.5%;
+    color: #FFFFFF;
     -webkit-transition: all 0s ease-in-out;
     -moz-transition: all 0s ease-in-out;
     -ms-transition: all 0s ease-in-out;
     -o-transition: all 0s ease-in-out;
     transition: all 0s ease-in-out;
+    background-color: rgba(51,51,51,0.8);
+    border: 0.3vw solid rgba(51,51,51,0.3);
+    border-radius: 9999px;
+    -webkit-backdrop-filter: blur(1vmin);
+    -moz-backdrop-filter: blur(1vmin);
+    -ms-backdrop-filter: blur(1vmin);
+    backdrop-filter: blur(1vmin);
 }
    
 /*---------------------PLAYER CONTROLS---------------------*/
@@ -374,17 +542,33 @@
     
 /*---------------------MEDIA QUERIES---------------------*/
 /*---------------------MEDIA QUERIES---------------------*/
-/*---------------------MEDIA QUERIES---------------------*/
-    
+/*---------------------MEDIA QUERIES---------------------*/  
+
 @media screen and (min-device-aspect-ratio: 6/7) {
 /* DESKTOP ONLY */  
     
-    #next-page:hover {
-        fill: #888888;
+    #search-bar:hover:not(:focus)::placeholder {
+        color: rgba(255,255,255,0.6);
     }
     
-    #prev-page:hover {
-        fill: #888888;
+    #category-dropdown-button:hover {
+        color: rgba(255,255,255,0.6);
+    }
+    
+    #category-dropdown-button:hover ~ #category-dropdown-icon {
+        opacity: 0.6;
+    }
+    
+    #category-dropdown-options li:hover {
+        opacity: 0.6;
+    }
+    
+    #next-page:hover {
+        opacity: 0.6;
+    }
+    
+    #previous-page:hover {
+        opacity: 0.6;
     }
     
 }
