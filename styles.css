@@ -39,7 +39,7 @@
     color: #FFFFFF;
     text-align: center;
     background-color: rgba(51,51,51,0.8);
-    border: 0.3vw solid rgba(51,51,51,0.3);
+    border: clamp(2px, 0.3vw, 4px) solid rgba(51,51,51,0.3);
     border-radius: 9999px;
     filter: blur(0px);
     -webkit-transition: all 0.2s ease-in-out;
@@ -114,7 +114,7 @@
     position: absolute;
     width: 100%;
     background-color: rgba(51,51,51,0.8);
-    border: 0.3vw solid rgba(51,51,51,0.3);
+    border: clamp(2px, 0.3vw, 4px) solid rgba(51,51,51,0.3);
     border-radius: 9999px;
     -webkit-transition: all 0.2s ease-in-out;
     -moz-transition: all 0.2s ease-in-out;
@@ -142,8 +142,8 @@
     display: none;
     list-style-type: none;
     background-color: rgba(51,51,51,0.8);
-    border: 0.3vw solid rgba(51,51,51,0.3);
-    border-radius: 2vw;
+    border: clamp(2px, 0.3vw, 4px) solid rgba(51,51,51,0.3);
+    border-radius: clamp(2px, 2vw, 30px);
     -webkit-user-select: none;        
     -moz-user-select: none;
     -ms-user-select: none;
@@ -196,8 +196,8 @@
     width: calc(16vmin * 1.7);
     height: calc(9vmin * 1.7);
     cursor: pointer;
-    border-top-left-radius: 0.5vw;
-    border-top-right-radius: 0.5vw;
+    border-top-left-radius: clamp(2px, 0.5vw, 20px);
+    border-top-right-radius: clamp(2px, 0.5vw, 20px);
 }
     
 #aspect-ratio {
@@ -217,8 +217,8 @@
     top: 0;
     left: -50%;
     filter: none;
-    border-top-left-radius: 0.5vw;
-    border-top-right-radius: 0.5vw;
+    border-top-left-radius: clamp(2px, 0.5vw, 20px);
+    border-top-right-radius: clamp(2px, 0.5vw, 20px);
 }
   
 #modal {
@@ -245,8 +245,8 @@
     bottom: -21.5%;
     overflow: hidden;
     background-color: rgba(51,51,51,0.9);
-    border-bottom-left-radius: 0.5vw;
-    border-bottom-right-radius: 0.5vw;
+    border-bottom-left-radius: clamp(2px, 0.5vw, 20px);
+    border-bottom-right-radius: clamp(2px, 0.5vw, 20px);
     -webkit-backdrop-filter: blur(1vmin);
     -moz-backdrop-filter: blur(1vmin);
     -ms-backdrop-filter: blur(1vmin);
@@ -314,10 +314,10 @@
     color: #FFFFFF;
     text-align: center;
     background-color: rgba(255,255,255,0);;
-    border: 0.3vw solid rgba(255,255,255,0);
-    outline: 0.25vw solid rgba(255,255,255,1);
-    outline-offset: -0.8vw;
-    border-radius: 1vw;
+    border: clamp(2px, 0.25vw, 4px) solid rgba(255,255,255,0);
+    outline: clamp(2px, 0.25vw, 4px) solid rgba(255,255,255,1);
+    outline-offset: clamp(-20px, -0.8vw, -10px);
+    border-radius: clamp(2px, 1vw, 30px);
     filter: blur(0px);
     -webkit-transition: all 0.2s ease-in-out;
     -moz-transition: all 0.2s ease-in-out;
@@ -349,10 +349,10 @@
     color: #FFFFFF;
     text-align: center;
     background-color: rgba(255,255,255,0);;
-    border: 0.3vw solid rgba(255,255,255,0);
-    outline: 0.25vw solid rgba(255,255,255,1);
-    outline-offset: -0.8vw;
-    border-radius: 1vw;
+    border: clamp(2px, 0.25vw, 4px) solid rgba(255,255,255,0);
+    outline: clamp(2px, 0.25vw, 4px) solid rgba(255,255,255,1);
+    outline-offset: clamp(-20px, -0.8vw, -10px);
+    border-radius: clamp(2px, 1vw, 30px);
     filter: blur(0px);
     -webkit-transition: all 0.2s ease-in-out;
     -moz-transition: all 0.2s ease-in-out;
@@ -379,7 +379,7 @@
     -o-transition: all 0s ease-in-out;
     transition: all 0s ease-in-out;
     background-color: rgba(51,51,51,0.8);
-    border: 0.3vw solid rgba(51,51,51,0.3);
+    border: clamp(2px, 0.3vw, 4px) solid rgba(51,51,51,0.3);
     border-radius: 9999px;
     -webkit-backdrop-filter: blur(1vmin);
     -moz-backdrop-filter: blur(1vmin);
