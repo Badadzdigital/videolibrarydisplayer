@@ -157,6 +157,7 @@
 #category-dropdown-icon {
     position: absolute;
     width: 7%;
+    top: 0;
     margin-top: 6%;
     right: 3%;
     -webkit-transition: all 0.1s ease-in-out;
@@ -298,7 +299,7 @@
     
 #next-page {
     position: absolute;
-    width: 15%;
+    width: 17%;
     height: auto;
     top: 0;
     right: 20%;
@@ -314,10 +315,6 @@
     color: #FFFFFF;
     text-align: center;
     background-color: rgba(255,255,255,0);;
-    border: clamp(2px, 0.25vw, 4px) solid rgba(255,255,255,0);
-    outline: clamp(2px, 0.25vw, 4px) solid rgba(255,255,255,1);
-    outline-offset: clamp(-20px, -0.8vw, -10px);
-    border-radius: clamp(2px, 1vw, 30px);
     filter: blur(0px);
     -webkit-transition: all 0.2s ease-in-out;
     -moz-transition: all 0.2s ease-in-out;
@@ -333,7 +330,7 @@
     
 #previous-page {
     position: absolute;
-    width: 15%;
+    width: 17%;
     height: auto;
     top: 0;
     left: 20%;
@@ -349,10 +346,6 @@
     color: #FFFFFF;
     text-align: center;
     background-color: rgba(255,255,255,0);;
-    border: clamp(2px, 0.25vw, 4px) solid rgba(255,255,255,0);
-    outline: clamp(2px, 0.25vw, 4px) solid rgba(255,255,255,1);
-    outline-offset: clamp(-20px, -0.8vw, -10px);
-    border-radius: clamp(2px, 1vw, 30px);
     filter: blur(0px);
     -webkit-transition: all 0.2s ease-in-out;
     -moz-transition: all 0.2s ease-in-out;
