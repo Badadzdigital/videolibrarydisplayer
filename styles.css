@@ -158,7 +158,7 @@
     position: absolute;
     width: 7%;
     top: 0;
-    margin-top: 6%;
+    margin-top: 3%;
     right: 3%;
     -webkit-transition: all 0.1s ease-in-out;
     -moz-transition: all 0.1s ease-in-out;
@@ -304,11 +304,6 @@
     top: 0;
     right: 20%;
     cursor: pointer;
-    -webkit-transition: all 0.1s ease-in-out;
-    -moz-transition: all 0.1s ease-in-out;
-    -ms-transition: all 0.1s ease-in-out;
-    -o-transition: all 0.1s ease-in-out;
-    transition: all 0.1s ease-in-out;
     font-size: 2.5vmin;
     line-height: normal;
     font-family: 'Heebo', sans-serif;
@@ -335,11 +330,6 @@
     top: 0;
     left: 20%;
     cursor: pointer;
-    -webkit-transition: all 0.1s ease-in-out;
-    -moz-transition: all 0.1s ease-in-out;
-    -ms-transition: all 0.1s ease-in-out;
-    -o-transition: all 0.1s ease-in-out;
-    transition: all 0.1s ease-in-out;
     font-size: 2.5vmin;
     line-height: normal;
     font-family: 'Heebo', sans-serif;
