@@ -499,7 +499,7 @@ function closeVideo() {
     modalOpen = 0;
     tracking = 0;
     videoPlayer.style = "display: none; pointer-events: none;";
-    document.getElementById("iframePlayer").style = "filter: none; border-top-left-radius: 0.5vw; border-top-right-radius: 0.5vw;";
+    document.getElementById("iframePlayer").style = "filter: none; border-top-left-radius: clamp(2px, 0.5vw, 4px) border-top-right-radius: clamp(2px, 0.5vw, 4px);";
     document.getElementById("library-container").style = "filter: blur(0px);";
     document.getElementById("search-bar").style = "filter: blur(0px);";
     document.getElementById("category-dropdown-button").style = "filter: blur(0px);";
