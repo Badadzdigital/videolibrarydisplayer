@@ -36,9 +36,9 @@ var categoryFilter = "";
 var listedCategories = [];
 var dropdownShown = 0;
 
-var nextPageButton = "<div id='next-page' onclick='nextPage()'>Next</div>";
+var nextPageButton = "<div id='next-page' onclick='nextPage()'>Next &#10145;</div>";
 
-var previousPageButton = "<div id='previous-page' onclick='previousPage()'>Previous</div>";
+var previousPageButton = "<div id='previous-page' onclick='previousPage()'>&#11013; Previous</div>";
     
 var playIcon = "<svg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 256 256' style='enable-background:new 0 0 256 256;' xml:space='preserve'><polygon points='63.9129,48.7885 63.9129,207.2115 196.0871,128 	'/></svg>";
     
