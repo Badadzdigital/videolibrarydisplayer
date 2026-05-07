@@ -371,6 +371,7 @@ function search() {
         }
         searchCount = searchIdList.length;
         searchPageCount = Math.ceil(searchCount/videoCountPerPage);
+        currentPage = 1;
         buildSearch();
     }
 }
