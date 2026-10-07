@@ -591,7 +591,7 @@ function startPreview(i) {
     if(!modalOpen) {
         if(searching) {
             if(voiceoverToggle) {
-                videoId = searchvoiceoverList[i-1];
+                videoId = searchVoiceoverList[i-1];
             } else {
                 videoId = searchIdList[i-1];
             }
