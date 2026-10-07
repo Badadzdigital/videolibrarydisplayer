@@ -271,9 +271,9 @@ function videoVoiceoverCB(error, options, response) {
     rawList = extractText(rawList, "{\"response\":\"<tr><td>", "</td></tr>\"");
     var voListRaw = rawList.split("</td></tr><tr><td>");
     for(i=0;i<voListRaw.length;i++) {
+        console.log("voListRaw[i] = "+voListRaw[i]);
         if(voListRaw[i]=="N/A") {
             videoId = idList[i];
-            console.log(videoId);
         } else {
             videoId = voListRaw[i].replace("https://www.youtube.com/watch?v=", "");
             if(videoId==voListRaw[i]) {
