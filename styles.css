@@ -156,10 +156,11 @@
     
 #category-dropdown-icon {
     position: absolute;
-    width: 7%;
+    width: 10%;
     top: 0;
-    margin-top: 2%;
+    margin-top: 5%;
     right: 3%;
+    transform-origin: 50% 30%;
     -webkit-transition: all 0.1s ease-in-out;
     -moz-transition: all 0.1s ease-in-out;
     -ms-transition: all 0.1s ease-in-out;
@@ -299,10 +300,14 @@
     
 #next-page {
     position: absolute;
-    width: 17%;
+    width: 3.5%;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+    padding-left: 3%;
+    padding-right: 1%;
     height: auto;
     top: 0;
-    right: 20%;
+    right: 35%;
     cursor: pointer;
     font-size: 2.5vmin;
     line-height: normal;
@@ -325,10 +330,14 @@
     
 #previous-page {
     position: absolute;
-    width: 17%;
+    width: 3.5%;
+    padding-top: 0.7%;
+    padding-bottom: 0.3%;
+    padding-left: 1%;
+    padding-right: 3%;
     height: auto;
     top: 0;
-    left: 20%;
+    left: 35%;
     cursor: pointer;
     font-size: 2.5vmin;
     line-height: normal;
@@ -353,8 +362,8 @@
     position: absolute;
     line-height: normal;
     text-align: center;
-    left: 18.5%;
-    width: 62.5%;
+    left: 34%;
+    width: 32%;
     color: #FFFFFF;
     -webkit-transition: all 0s ease-in-out;
     -moz-transition: all 0s ease-in-out;
