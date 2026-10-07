@@ -38,7 +38,7 @@ var iframePlayer;
 var categoryFilter = "";
 var listedCategories = [];
 var dropdownShown = 0;
-var voiceoverToggle = 1;
+var voiceover = 1;
 
 /*var nextPageButton = "<div id='next-page' onclick='nextPage()'>Next &#10145;</div>";
 
@@ -309,6 +309,15 @@ function addCardEventListeners(i) {
     cardDiv.addEventListener("mouseenter", startPreview.bind(null, i));
     cardDiv.addEventListener("mouseleave", endPreview.bind(null, i));
 }
+    
+function toggleVoiceover(voiceoverToggle) {
+    voiceover = voiceoverToggle;
+    if(voiceover) {
+        //Change slider to ON position
+    } else {
+        //Change slider to OFF position
+    }
+}
 
 function buildLibrary() {
     var xhash = window.location.hash;
@@ -316,6 +325,12 @@ function buildLibrary() {
         //xhash = xhash.replace("#vid", "");
         xhash = xhash.replace("#", "");
         if(isNaN(xhash)) {
+            if(xhash.slice(0,3) == "VO_") {
+                xhash = xhash.slice(3);
+                toggleVoiceover(1);
+            } else {
+                toggleVoiceover(0);
+            }
             xhash = xhash.toLowerCase();
             xhash = xhash.replace(new RegExp("-", "g"), " ");
             var nameListLC = nameList;
@@ -515,14 +530,14 @@ function previousPage() {
 
 function openVideo(i) {
     if(searching) {
-        if(voiceoverToggle) {
+        if(voiceover) {
             videoId = searchVoiceoverList[i-1];
         } else {
             videoId = searchIdList[i-1];
         }
         videoName = searchNameList[i-1];
     } else {
-        if(voiceoverToggle) {
+        if(voiceover) {
             videoId = voiceoverList[i-1];
         } else {
             videoId = idList[i-1];
@@ -566,9 +581,17 @@ function openVideo(i) {
     }
     //window.location.hash = i;
     if(searching) {
-        window.history.pushState({}, "", "#"+searchNameList[i-1].replace(new RegExp(" ", "g"), "-"));
+        if(voiceover) {
+            window.history.pushState({}, "", "#VO_"+searchNameList[i-1].replace(new RegExp(" ", "g"), "-"));
+        } else {
+            window.history.pushState({}, "", "#"+searchNameList[i-1].replace(new RegExp(" ", "g"), "-"));
+        }
     } else {
-        window.history.pushState({}, "", "#"+nameList[i-1].replace(new RegExp(" ", "g"), "-"));
+        if(voiceover) {
+            window.history.pushState({}, "", "#VO_"+nameList[i-1].replace(new RegExp(" ", "g"), "-"));
+        } else {
+            window.history.pushState({}, "", "#"+nameList[i-1].replace(new RegExp(" ", "g"), "-"));
+        }
     }
     if(dropdownShown) {toggleCategoryDropdown();}
 }
@@ -596,13 +619,13 @@ function closeVideo() {
 function startPreview(i) {
     if(!modalOpen) {
         if(searching) {
-            if(voiceoverToggle) {
+            if(voiceover) {
                 videoId = searchVoiceoverList[i-1];
             } else {
                 videoId = searchIdList[i-1];
             }
         } else {
-            if(voiceoverToggle) {
+            if(voiceover) {
                 videoId = voiceoverList[i-1];
             } else {
                 videoId = idList[i-1];
@@ -734,6 +757,7 @@ function toggleCategoryDropdown() {
 
 function initialize() {
     getDevice();
+    toggleVoiceover(voiceover);
     document.getElementById("vldp-container").innerHTML = "<div id='library-container'></div><div id='filter-bar'><input id='search-bar' type='text' placeholder='Search for a video' tabindex='-1'><div id='search-icon'>"+searchIcon+"</div><div id='cancel-icon' onclick='cancelSearch()'>"+cancelIcon+"</div><div id='category-dropdown'><div id='category-dropdown-button' onclick='toggleCategoryDropdown()'>Categories</div><div id='category-dropdown-icon'>"+dropdownIcon+"</div><ul id='category-dropdown-options'></ul></div></div><div id='modal'></div><div id='aspect-ratio'><div id='iframePlayer'></div><div id='title-box'></div><div id='player-controls'><div id='toggle-play'>"+pauseIcon+"</div><div id='toggle-audio'>"+audioIcon+"</div><div id='toggle-fullscreen'>"+fullscreenIcon+"</div><div id='timeline'>"+progressBar+"<div id='scrubber'>"+progressBar+"</div><div id='scrubber-preview'>"+progressBar+"</div><span class='txt'>0:00 / 0:00</span></div></div></div>";
     setTimeout(function(){
         document.getElementById("modal").addEventListener("mousedown", closeVideo);
