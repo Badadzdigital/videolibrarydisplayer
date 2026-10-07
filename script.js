@@ -325,7 +325,7 @@ function buildLibrary() {
         //xhash = xhash.replace("#vid", "");
         xhash = xhash.replace("#", "");
         if(isNaN(xhash)) {
-            if(xhash.slice(0,3) == "VO_") {
+            if(xhash.slice(0,3) == "VO-") {
                 xhash = xhash.slice(3);
                 toggleVoiceover(1);
             } else {
@@ -582,13 +582,13 @@ function openVideo(i) {
     //window.location.hash = i;
     if(searching) {
         if(voiceover) {
-            window.history.pushState({}, "", "#VO_"+searchNameList[i-1].replace(new RegExp(" ", "g"), "-"));
+            window.history.pushState({}, "", "#VO-"+searchNameList[i-1].replace(new RegExp(" ", "g"), "-"));
         } else {
             window.history.pushState({}, "", "#"+searchNameList[i-1].replace(new RegExp(" ", "g"), "-"));
         }
     } else {
         if(voiceover) {
-            window.history.pushState({}, "", "#VO_"+nameList[i-1].replace(new RegExp(" ", "g"), "-"));
+            window.history.pushState({}, "", "#VO-"+nameList[i-1].replace(new RegExp(" ", "g"), "-"));
         } else {
             window.history.pushState({}, "", "#"+nameList[i-1].replace(new RegExp(" ", "g"), "-"));
         }
