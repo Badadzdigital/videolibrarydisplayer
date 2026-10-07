@@ -590,9 +590,17 @@ function closeVideo() {
 function startPreview(i) {
     if(!modalOpen) {
         if(searching) {
-            videoId = searchIdList[i-1];
+            if(voiceoverToggle) {
+                videoId = searchvoiceoverList[i-1];
+            } else {
+                videoId = searchIdList[i-1];
+            }
         } else {
-            videoId = idList[i-1];
+            if(voiceoverToggle) {
+                videoId = voiceoverList[i-1];
+            } else {
+                videoId = idList[i-1];
+            }
         }
         lastIndex = i;
         var boundingBox = document.getElementById("vid"+i).getBoundingClientRect();
