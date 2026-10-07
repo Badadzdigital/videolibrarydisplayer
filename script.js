@@ -40,9 +40,13 @@ var listedCategories = [];
 var dropdownShown = 0;
 var voiceoverToggle = 1;
 
-var nextPageButton = "<div id='next-page' onclick='nextPage()'>Next &#10145;</div>";
+/*var nextPageButton = "<div id='next-page' onclick='nextPage()'>Next &#10145;</div>";
 
-var previousPageButton = "<div id='previous-page' onclick='previousPage()'>&#11013; Previous</div>";
+var previousPageButton = "<div id='previous-page' onclick='previousPage()'>&#11013; Previous</div>";*/
+    
+var nextPageButton = "<div id='next-page' onclick='nextPage()'><svg id='Layer_1' data-name='Layer 1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 900'><defs><style>.cls-1{fill: #fff;}</style></defs><g transform='rotate(-90,450,450)'><path class='cls-1' d='m384.91,613.3L6.05,54.32C-9.61,31.21,6.94,0,34.85,0h757.71c27.91,0,44.46,31.21,28.8,54.32l-378.86,558.98c-13.8,20.37-43.8,20.37-57.61,0Z'/></g></svg></div>"
+
+var previousPageButton = "<div id='previous-page' onclick='previousPage()'><svg id='Layer_1' data-name='Layer 1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 900'><defs><style>.cls-1{fill: #fff;}</style></defs><g transform='rotate(90,450,450)'><path class='cls-1' d='m384.91,613.3L6.05,54.32C-9.61,31.21,6.94,0,34.85,0h757.71c27.91,0,44.46,31.21,28.8,54.32l-378.86,558.98c-13.8,20.37-43.8,20.37-57.61,0Z'/></g></svg></div>"
     
 var playIcon = "<svg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 256 256' style='enable-background:new 0 0 256 256;' xml:space='preserve'><polygon points='63.9129,48.7885 63.9129,207.2115 196.0871,128 	'/></svg>";
     
@@ -56,7 +60,7 @@ var fullscreenIcon = "<svg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2
     
 var progressBar = "<svg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 256 256' style='enable-background:new 0 0 256 256;' xml:space='preserve' preserveAspectRatio='none'><rect y='161.4064' width='256' height='33.1872'/></svg>";
     
-var dropdownIcon = "<svg id='Layer_1' data-name='Layer 1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 827.42 628.57'><defs><style>.cls-1{fill: #fff;}</style></defs><path class='cls-1' d='m384.91,613.3L6.05,54.32C-9.61,31.21,6.94,0,34.85,0h757.71c27.91,0,44.46,31.21,28.8,54.32l-378.86,558.98c-13.8,20.37-43.8,20.37-57.61,0Z'/></svg>";
+var dropdownIcon = "<svg id='Layer_1' data-name='Layer 1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 900'><defs><style>.cls-1{fill: #fff;}</style></defs><path class='cls-1' d='m384.91,613.3L6.05,54.32C-9.61,31.21,6.94,0,34.85,0h757.71c27.91,0,44.46,31.21,28.8,54.32l-378.86,558.98c-13.8,20.37-43.8,20.37-57.61,0Z'/></svg>";
     
 var searchIcon = "<svg id='Layer_1' data-name='Layer 1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 761.24 761.24'><defs><style>.cls-1 {fill: #fff;}</style></defs><path class='cls-1' d='m743.67,658.81l-160.35-160.35c34.75-51.1,55.07-112.81,55.07-179.27C638.39,142.91,495.48,0,319.19,0S0,142.91,0,319.19s142.91,319.19,319.19,319.19c66.46,0,128.17-20.32,179.27-55.07l160.35,160.35c11.72,11.72,27.07,17.57,42.43,17.57s30.71-5.86,42.43-17.57c23.43-23.43,23.43-61.42,0-84.85Zm-424.47-105.69c-129.19,0-233.93-104.73-233.93-233.93s104.73-233.93,233.93-233.93,233.93,104.73,233.93,233.93-104.73,233.93-233.93,233.93Z'/></svg>";
     
@@ -473,14 +477,14 @@ function selectCategory(selectedCategory) {
 
 function nextPage() {
     if(searching) {
-        if(firstVideoIndex+videoCountPerPage<searchCount) {
+        if(firstVideoIndex+videoCountPerPage<=searchCount) {
             firstVideoIndex += videoCountPerPage;
             currentPage += 1;
             buildSearch();
             document.getElementById("page-text").innerHTML = "<span class='txt'>Page "+currentPage+"/"+searchPageCount+"</span>";
         }
     } else {
-        if(firstVideoIndex+videoCountPerPage<videoCount) {
+        if(firstVideoIndex+videoCountPerPage<=videoCount) {
             firstVideoIndex += videoCountPerPage;
             currentPage += 1;
             buildLibrary();
