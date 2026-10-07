@@ -15,7 +15,11 @@ var idList = [];
 var nameList = [];
 var imgList = [];
 var categoryList = [];
+var tagsList = [];
+var ingredientsList = [];
+var voiceoverList = [];
 var searchIdList = [];
+var searchVoiceoverList = [];
 var searchNameList = [];
 var searchImgList = [];
 var firstVideoIndex = 1;
@@ -35,6 +39,7 @@ var videoShort = 0;
 var categoryFilter = "";
 var listedCategories = [];
 var dropdownShown = 0;
+var voiceoverToggle = 1;
 
 var nextPageButton = "<div id='next-page' onclick='nextPage()'>Next &#10145;</div>";
 
@@ -230,10 +235,64 @@ function videoCategoryCB(error, options, response) {
     var rawList = JSON.stringify(theData);
     rawList = extractText(rawList, "{\"response\":\"<tr><td>", "</td></tr>\"");
     categoryList = rawList.split("</td></tr><tr><td>");
+    sheetrock({
+        url: spreadsheet,
+        query: "select E",
+        callback: videoTagsCB
+    });
+}
+    
+function videoTagsCB(error, options, response) {
+    theData.response = response.html;
+    var rawList = JSON.stringify(theData);
+    rawList = extractText(rawList, "{\"response\":\"<tr><td>", "</td></tr>\"");
+    tagsList = rawList.split("</td></tr><tr><td>");
+    sheetrock({
+        url: spreadsheet,
+        query: "select F",
+        callback: videoIngredientsCB
+    });
+}
+    
+function videoIngredientsCB(error, options, response) {
+    theData.response = response.html;
+    var rawList = JSON.stringify(theData);
+    rawList = extractText(rawList, "{\"response\":\"<tr><td>", "</td></tr>\"");
+    ingredientsList = rawList.split("</td></tr><tr><td>");
+    sheetrock({
+        url: spreadsheet,
+        query: "select G",
+        callback: videoVoiceoverCB
+    });
+}
+    
+    
+function videoVoiceoverCB(error, options, response) {
+    theData.response = response.html;
+    var rawList = JSON.stringify(theData);
+    rawList = extractText(rawList, "{\"response\":\"<tr><td>", "</td></tr>\"");
+    var voListRaw = rawList.split("</td></tr><tr><td>");
+    for(i=0;i<voListRaw.length;i++) {
+        videoId = voListRaw[i].replace("https://www.youtube.com/watch?v=", "");
+        if((videoId==voListRaw[i])&&(videoID!="N/A")) {
+            videoId = voListRaw[i].replace("https://www.youtube.com/shorts/", "");
+            videoShort = 1;
+        }  
+        voiceoverList[voiceoverList.length] = videoId; 
+        if(i==voListRaw.length-1) {
+            callbackFinish();
+        }
+    }
+}
+    
+function callbackFinish() {
     idList.shift();
     imgList.shift();
     nameList.shift();
     categoryList.shift();
+    tagList.shift();
+    ingredientList.shift();
+    voiceoverList.shift();
     buildCategories();
     buildLibrary();
 }
@@ -349,6 +408,7 @@ function search() {
             searching = 1;
         }
         searchIdList = [];
+        searchVoiceoverList = [];
         searchNameList = [];
         searchImgList = [];
         //nest this loop inside another loop to iterate through list X where list X is the search query split by whitespace?
@@ -357,14 +417,17 @@ function search() {
             var filterMatch = (categoryList[i1] == categoryFilter);
             if((categoryFilter == "") && searchMatch) {
                 searchIdList[searchIdList.length] = idList[i1];
+                searchVoiceoverList[searchVoiceoverList.length] = voiceoverList[i1];
                 searchNameList[searchNameList.length] = nameList[i1];
                 searchImgList[searchImgList.length] = imgList[i1];
             } else if((searchQuery == "") && filterMatch) {
                 searchIdList[searchIdList.length] = idList[i1];
+                searchVoiceoverList[searchVoiceoverList.length] = voiceoverList[i1];
                 searchNameList[searchNameList.length] = nameList[i1];
                 searchImgList[searchImgList.length] = imgList[i1];
             } else if((categoryFilter != "") && (searchQuery != "") && searchMatch && filterMatch) {
                 searchIdList[searchIdList.length] = idList[i1];
+                searchVoiceoverList[searchVoiceoverList.length] = voiceoverList[i1];
                 searchNameList[searchNameList.length] = nameList[i1];
                 searchImgList[searchImgList.length] = imgList[i1];
             }
@@ -446,10 +509,18 @@ function previousPage() {
 
 function openVideo(i) {
     if(searching) {
-        videoId = searchIdList[i-1];
+        if(voiceoverToggle) {
+            videoId = searchVoiceoverList[i-1];
+        } else {
+            videoId = searchIdList[i-1];
+        }
         videoName = searchNameList[i-1];
     } else {
-        videoId = idList[i-1];
+        if(voiceoverToggle) {
+            videoId = voiceoverList[i-1];
+        } else {
+            videoId = idList[i-1];
+        }
         videoName = nameList[i-1];
     }
     /*if(mobile) {
@@ -649,7 +720,7 @@ function toggleCategoryDropdown() {
 
 function initialize() {
     getDevice();
-    document.getElementById("vldp-container").innerHTML = "<div id='library-container'></div><div id='filter-bar'><input id='search-bar' type='text' placeholder='Search for a video' tabindex='-1'><div id='search-icon'>"+searchIcon+"</div><div id='cancel-icon' onclick='cancelSearch()'>"+cancelIcon+"</div><div id='category-dropdown'><div id='category-dropdown-button' onclick='toggleCategoryDropdown()'>Categories</div><ul id='category-dropdown-options'></ul><div id='category-dropdown-icon'>"+dropdownIcon+"</div></div></div><div id='modal'></div><div id='aspect-ratio'><div id='iframePlayer'></div><div id='title-box'></div><div id='player-controls'><div id='toggle-play'>"+pauseIcon+"</div><div id='toggle-audio'>"+audioIcon+"</div><div id='toggle-fullscreen'>"+fullscreenIcon+"</div><div id='timeline'>"+progressBar+"<div id='scrubber'>"+progressBar+"</div><div id='scrubber-preview'>"+progressBar+"</div><span class='txt'>0:00 / 0:00</span></div></div></div>";
+    document.getElementById("vldp-container").innerHTML = "<div id='library-container'></div><div id='filter-bar'><input id='search-bar' type='text' placeholder='Search for a video' tabindex='-1'><div id='search-icon'>"+searchIcon+"</div><div id='cancel-icon' onclick='cancelSearch()'>"+cancelIcon+"</div><div id='category-dropdown'><div id='category-dropdown-button' onclick='toggleCategoryDropdown()'>Categories</div><div id='category-dropdown-icon'>"+dropdownIcon+"</div><ul id='category-dropdown-options'></ul></div></div><div id='modal'></div><div id='aspect-ratio'><div id='iframePlayer'></div><div id='title-box'></div><div id='player-controls'><div id='toggle-play'>"+pauseIcon+"</div><div id='toggle-audio'>"+audioIcon+"</div><div id='toggle-fullscreen'>"+fullscreenIcon+"</div><div id='timeline'>"+progressBar+"<div id='scrubber'>"+progressBar+"</div><div id='scrubber-preview'>"+progressBar+"</div><span class='txt'>0:00 / 0:00</span></div></div></div>";
     setTimeout(function(){
         document.getElementById("modal").addEventListener("mousedown", closeVideo);
         document.getElementById("aspect-ratio").addEventListener("mousedown", closeVideo);
