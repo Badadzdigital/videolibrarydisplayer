@@ -35,7 +35,6 @@ var i = 0;
 var mobile = 0;
 var videoPlayer;
 var iframePlayer;
-var videoShort = 0;
 var categoryFilter = "";
 var listedCategories = [];
 var dropdownShown = 0;
@@ -203,7 +202,6 @@ function videoIdCB(error, options, response) {
         videoId = idListRaw[i].replace("https://www.youtube.com/watch?v=", "");
         if(videoId==idListRaw[i]) {
             videoId = idListRaw[i].replace("https://www.youtube.com/shorts/", "");
-            videoShort = 1;
         }
         videoImg = "http://img.youtube.com/vi/"+videoId+"/mqdefault.jpg";
         idList[idList.length] = videoId;
@@ -273,11 +271,14 @@ function videoVoiceoverCB(error, options, response) {
     rawList = extractText(rawList, "{\"response\":\"<tr><td>", "</td></tr>\"");
     var voListRaw = rawList.split("</td></tr><tr><td>");
     for(i=0;i<voListRaw.length;i++) {
-        videoId = voListRaw[i].replace("https://www.youtube.com/watch?v=", "");
-        if((videoId==voListRaw[i])&&(videoID!="N/A")) {
-            videoId = voListRaw[i].replace("https://www.youtube.com/shorts/", "");
-            videoShort = 1;
-        }  
+        if(voListRaw[i]=="N/A") {
+            videoId = idList[i];
+        } else {
+            videoId = voListRaw[i].replace("https://www.youtube.com/watch?v=", "");
+            if(videoId==voListRaw[i]) {
+                videoId = voListRaw[i].replace("https://www.youtube.com/shorts/", "");
+            }  
+        }
         voiceoverList[voiceoverList.length] = videoId; 
         if(i==voListRaw.length-1) {
             callbackFinish();
