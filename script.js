@@ -273,6 +273,7 @@ function videoVoiceoverCB(error, options, response) {
     for(i=0;i<voListRaw.length;i++) {
         if(voListRaw[i]=="N/A") {
             videoId = idList[i];
+            console.log(videoId);
         } else {
             videoId = voListRaw[i].replace("https://www.youtube.com/watch?v=", "");
             if(videoId==voListRaw[i]) {
