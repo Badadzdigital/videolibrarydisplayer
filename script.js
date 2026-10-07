@@ -271,7 +271,6 @@ function videoVoiceoverCB(error, options, response) {
     rawList = extractText(rawList, "{\"response\":\"<tr><td>", "</td></tr>\"");
     var voListRaw = rawList.split("</td></tr><tr><td>");
     for(i=0;i<voListRaw.length;i++) {
-        console.log("voListRaw[i] = "+voListRaw[i]);
         if(voListRaw[i]=="N/A") {
             videoId = idList[i];
         } else {
@@ -280,9 +279,10 @@ function videoVoiceoverCB(error, options, response) {
                 videoId = voListRaw[i].replace("https://www.youtube.com/shorts/", "");
             }  
         }
-        voiceoverList[voiceoverList.length] = videoId; 
+        voiceoverList[voiceoverList.length] = videoId;
         if(i==voListRaw.length-1) {
             callbackFinish();
+            break;
         }
     }
 }
@@ -292,8 +292,8 @@ function callbackFinish() {
     imgList.shift();
     nameList.shift();
     categoryList.shift();
-    tagList.shift();
-    ingredientList.shift();
+    tagsList.shift();
+    ingredientsList.shift();
     voiceoverList.shift();
     buildCategories();
     buildLibrary();
