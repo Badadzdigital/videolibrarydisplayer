@@ -804,3 +804,19 @@ function resizeElements() {
 }
 
 setTimeout(initialize, 1000);
+
+window.addEventListener("keydown", (event) => {
+  // Prevent default scrolling behavior for arrow keys
+  if (["ArrowLeft", "ArrowRight"].includes(event.key)) {
+    event.preventDefault();
+  }
+
+  switch (event.key) {
+    case "ArrowLeft":
+      previousPage();
+      break;
+    case "ArrowRight":
+      nextPage();
+      break;
+  }
+});
