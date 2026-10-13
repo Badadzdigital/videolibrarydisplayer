@@ -30,17 +30,18 @@
 #search-bar {
     position: absolute;
     top: 0;
-    width: 50%;
-    left: 10%;
+    width: 57%;
+    left: 6%;
     margin-top: 2%;
     font-size: 2.5vmin;
     line-height: normal;
     font-family: 'Heebo', sans-serif;
     color: #FFFFFF;
-    text-align: center;
+    text-align: left;
+    padding-left: 6%;
     background-color: rgba(51,51,51,0.8);
     border: clamp(2px, 0.3vw, 4px) solid rgba(51,51,51,0.3);
-    border-radius: 9999px;
+    border-radius: 9999px 0px 0px 9999px;
     filter: blur(0px);
     -webkit-transition: all 0.2s ease-in-out;
     -moz-transition: all 0.2s ease-in-out;
@@ -78,7 +79,7 @@
     position: absolute;
     top: 0;
     width: 2.8%;
-    left: 11%;
+    left: 7.5%;
     margin-top: 3%;
     opacity: 0.4;
     pointer-events: none;
@@ -99,8 +100,8 @@
     
 #category-dropdown {
     position: absolute;
-    width: 27%;
-    right: 10%;
+    width: 29.5%;
+    right: 7.5%;
     margin-top: 2%;
     font-size: 2.5vmin;
     line-height: normal;
@@ -113,9 +114,11 @@
 #category-dropdown-button {
     position: absolute;
     width: 100%;
+    padding-top: 1px;
+    padding-bottom: 1px;
     background-color: rgba(51,51,51,0.8);
     border: clamp(2px, 0.3vw, 4px) solid rgba(51,51,51,0.3);
-    border-radius: 9999px;
+    border-radius: 0px 9999px 9999px 0px;
     -webkit-transition: all 0.2s ease-in-out;
     -moz-transition: all 0.2s ease-in-out;
     -ms-transition: all 0.2s ease-in-out;
@@ -157,8 +160,8 @@
 #category-dropdown-icon {
     position: absolute;
     width: 10%;
-    top: 0;
-    margin-top: 5%;
+    top: 2px;
+    margin-top: 4.5%;
     right: 3%;
     transform-origin: 50% 30%;
     -webkit-transition: all 0.1s ease-in-out;
@@ -168,6 +171,10 @@
     transition: all 0.1s ease-in-out;
     pointer-events: none;
 }
+    
+    #category-dropdown-options li {
+        margin-top: 5%;
+    }
     
 /*---------------------LIBRARY AND PLAYER---------------------*/
 /*---------------------LIBRARY AND PLAYER---------------------*/
@@ -331,7 +338,7 @@
 #previous-page {
     position: absolute;
     width: 3.5%;
-    padding-top: 0.7%;
+    padding-top: 0.75%;
     padding-bottom: 0.3%;
     padding-left: 1%;
     padding-right: 3%;
